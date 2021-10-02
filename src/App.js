@@ -1,8 +1,8 @@
+import Routes from "./utils/routes";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">Welcome to manth solution</header>
-    </div>
+      <Routes />
   );
 }
 
