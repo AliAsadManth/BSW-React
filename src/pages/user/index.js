@@ -1,11 +1,11 @@
 import React from "react";
-import Main from "./Main";
+import LandingPage from "./LandingPage";
 import { Switch, Route } from "react-router-dom";
 
 const index = () => {
   return (
     <Switch>
-      <Route path="/" exact component={Main} />
+      <Route path="/" exact component={LandingPage} />
     </Switch>
   );
 };

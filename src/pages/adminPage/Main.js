@@ -1,12 +1,12 @@
-import React from 'react'
-import Sidebar from './component/Drawer'
+import React from "react";
+import Sidebar from "./component/Drawer";
 
 const Main = () => {
-    return (
-        <div>
-            <Sidebar/>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Sidebar />
+    </div>
+  );
+};
 
-export default Main
+export default Main;
