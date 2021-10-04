@@ -2,7 +2,6 @@ import React from "react";
 import styled from "@emotion/styled";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Typography } from "@mui/material";
 
 const Nav = styled.nav`
   position: relative;
