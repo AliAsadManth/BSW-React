@@ -9,15 +9,12 @@ const Container = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
-  background-color: grey;
+  padding: 0 6rem;
+  background-color: #808080;
   .searchIcon {
     position: absolute;
-    right: 6.5rem;
+    right: 11rem;
     cursor: pointer;
-    @media (max-width: 768px) {
-      right: 2.5rem;
-    }
   }
 `;
 const Text = styled.span`
@@ -29,9 +26,6 @@ const Text = styled.span`
   justify-content: space-between;
   width: 110px;
   cursor: pointer;
-  @media (max-width: 768px) {
-    margin-left: 0;
-  }
 `;
 const Searchbar = styled.input`
   margin-right: 4rem;
@@ -58,9 +52,6 @@ const Searchbar = styled.input`
       transition: opacity 250ms ease;
       opacity: 0;
     }
-  }
-  @media (max-width: 768px) {
-    margin-right: 0;
   }
 `;
 

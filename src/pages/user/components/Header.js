@@ -9,7 +9,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
+  padding: 10px 6rem;
 `;
 
 const Logo = styled.a`
@@ -21,9 +21,6 @@ const Logo = styled.a`
   margin-left: 4rem;
   img {
     height: 60px;
-  }
-  @media (max-width: 768px) {
-    margin-left: 0;
   }
 `;
 
@@ -61,16 +58,13 @@ const SideButtons = styled.div`
       }
     }
   }
-  @media (max-width: 768px) {
-    margin-right: 0;
-  }
 `;
 
 const Header = () => {
   return (
     <Nav>
       <Logo>
-        <img src="/assets/bsw-logo-navbar.png" alt="BWS" />
+        <img src="/assets/bsw-logo-small.png" alt="BWS" />
       </Logo>
       <SideButtons>
         <div>
