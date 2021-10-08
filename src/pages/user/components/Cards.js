@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Cards = ({ name, image, description }) => {
+const Cards = ({ name, image, description, price }) => {
   return (
     <Card
       elevation="2"
@@ -19,20 +19,27 @@ const Cards = ({ name, image, description }) => {
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
       }}
     >
-      <CardHeader
-        title={name}
-        style={{
-          textAlign: "left",
-          marginLeft: -8,
-        }}
-      />
-      <CardMedia component="img" height="194" image={image} alt="Paella dish" />
+      <CardMedia component="img" height="160" image={image} alt="Paella dish" />
       <CardContent
         style={{
           textAlign: "left",
           marginLeft: -8,
         }}
       >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography style={{ fontSize: 22 }} noWrap>
+            {name}
+          </Typography>
+          <Typography style={{ fontSize: 12 }} noWrap>
+            ${price}
+          </Typography>
+        </div>
         <Typography noWrap>{description}</Typography>
       </CardContent>
       <CardActions
@@ -40,9 +47,17 @@ const Cards = ({ name, image, description }) => {
           borderTop: "1px solid grey",
         }}
       >
-        <Typography>
-          <Link>View Product</Link>
-        </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <Typography>
+            <Link style={{ textDecoration: "none" }}>View Product</Link>
+          </Typography>
+        </div>
       </CardActions>
     </Card>
   );
