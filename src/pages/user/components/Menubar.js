@@ -10,7 +10,7 @@ const Container = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 6rem;
-  background-color: #808080;
+  background-color: rgb(117, 117, 117);
   .searchIcon {
     position: absolute;
     right: 11rem;

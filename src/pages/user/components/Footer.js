@@ -9,16 +9,9 @@ const Container = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
-  background-color: #808080;
-  .searchIcon {
-    position: absolute;
-    right: 6.5rem;
-    cursor: pointer;
-  }
+  padding: 0 10%;
 `;
 const Text = styled.span`
-  margin-left: 4rem;
   font-size: 18px;
   color: white;
   display: flex;
@@ -30,15 +23,17 @@ const Text = styled.span`
 
 const Footer = () => {
   return (
+    <div style={{width:"100vw",backgroundColor:"rgb(51, 51, 51)"}}>
     <Container>
-      <Text>contact on bws@gmail.com</Text>
-      <div style={{ width: 100 }}>
-        <FacebookIcon />
-        <InstagramIcon />
-        <TwitterIcon />
-      </div>
-      <Text>Powered by MANTH Solution</Text>
+        <Text>contact on bws@gmail.com</Text>
+        <div style={{ width: 100 }}>
+          <FacebookIcon />
+          <InstagramIcon />
+          <TwitterIcon />
+        </div>
+        <Text>Powered by MANTH Solution</Text>
     </Container>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const Text = styled.p`
 
 const ProductsRow = () => {
   return (
-    <div style={{ backgroundColor: "#FCFCFC" }}>
+    <div style={{ backgroundColor: "#e6e6e6" }}>
       <Container>
         <Text>Recent Products</Text>
         <Content>

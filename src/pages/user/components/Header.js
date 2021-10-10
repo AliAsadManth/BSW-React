@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -61,13 +62,14 @@ const SideButtons = styled.div`
 `;
 
 const Header = () => {
+  const history=useHistory();
   return (
     <Nav>
       <Logo>
         <img src="/assets/bsw-logo-small.png" alt="BWS" />
       </Logo>
       <SideButtons>
-        <div>
+        <div onClick={()=>history.push("/login")}>
           <AccountCircleIcon fontSize="large" />
           <span>Login</span>
         </div>

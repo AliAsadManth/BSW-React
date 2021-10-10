@@ -15,7 +15,7 @@ const Cards = ({ name, image, description, price }) => {
       elevation="2"
       style={{
         margin: 20,
-        width: 275,
+        width: 245,
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
       }}
     >

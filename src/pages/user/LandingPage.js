@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div style={{position:"relative",overflowX:"hidden"}}>
       <Header />
       <Menubar />
       <ImgSlider />
