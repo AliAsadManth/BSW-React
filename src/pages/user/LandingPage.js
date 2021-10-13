@@ -6,15 +6,15 @@ import ProductsRow from "./components/ProductsRow";
 import Footer from "./components/Footer";
 
 const LandingPage = () => {
-  return (
-    <div style={{position:"relative",overflowX:"hidden"}}>
-      <Header />
-      <Menubar />
-      <ImgSlider />
-      <ProductsRow/>
-      <Footer/>
-    </div>
-  );
+	return (
+		<div style={{ position: "relative", overflowX: "hidden" }}>
+			<Header component="LandingPage" />
+			<Menubar />
+			<ImgSlider />
+			<ProductsRow />
+			<Footer />
+		</div>
+	);
 };
 
 export default LandingPage;

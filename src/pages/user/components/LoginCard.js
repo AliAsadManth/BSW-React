@@ -92,7 +92,7 @@ const Cards = ({ email, password, setEmail, setPassword, onSubmit }) => {
 					}}
 				>
 					<Typography>
-						<Link style={{ textDecoration: "none" }}>
+						<Link to="/signup" style={{ textDecoration: "none" }}>
 							Sign up for a BWS account
 						</Link>
 					</Typography>
