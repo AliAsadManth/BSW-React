@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
 	Typography,
@@ -8,7 +8,6 @@ import {
 	Divider,
 } from "@mui/material";
 import InputField from "./InputField";
-import { display } from "@mui/system";
 
 const Container = styled.div`
 	width: 80vw;
@@ -17,7 +16,23 @@ const Container = styled.div`
 	margin-bottom: 50px;
 `;
 
-const SignupForm = () => {
+const SignupForm = ({
+	name,
+	setName,
+	email,
+	setEmail,
+	password,
+	setPassword,
+	confirmPassword,
+	setConfirmPassword,
+	showPassword,
+	setShowPassword,
+	address,
+	setAddress,
+	phone,
+	setPhone,
+	onSubmit,
+}) => {
 	return (
 		<Container>
 			<Typography style={{ fontSize: 32 }} noWrap>
@@ -36,7 +51,7 @@ const SignupForm = () => {
 				}}
 			/>
 			<form
-				onSubmit={() => console.log("welcome")}
+				onSubmit={onSubmit}
 				style={{ display: "flex", flexDirection: "column" }}
 			>
 				<div
@@ -56,8 +71,8 @@ const SignupForm = () => {
 					<InputField
 						placeholder="Name"
 						type="text"
-						// value={email}
-						// onChange={(e) => setEmail(e.target.value)}
+						value={name}
+						onChange={(e) => setName(e.target.value)}
 						style={{ width: "50%", height: "35px", marginTop: "20px" }}
 					/>
 				</div>
@@ -78,8 +93,8 @@ const SignupForm = () => {
 					<InputField
 						placeholder="Email"
 						type="email"
-						// value={email}
-						// onChange={(e) => setEmail(e.target.value)}
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
 						style={{ width: "50%", height: "35px", marginTop: "20px" }}
 					/>
 				</div>
@@ -95,13 +110,13 @@ const SignupForm = () => {
 						style={{ fontSize: 18, color: "grey", marginTop: 15 }}
 						noWrap
 					>
-						password
+						Password
 					</Typography>
 					<InputField
 						placeholder="Password"
-						type="password"
-						// value={email}
-						// onChange={(e) => setEmail(e.target.value)}
+						type={showPassword ? "text" : "password"}
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
 						style={{ width: "50%", height: "35px", marginTop: "20px" }}
 					/>
 				</div>
@@ -117,21 +132,49 @@ const SignupForm = () => {
 						style={{ fontSize: 18, color: "grey", marginTop: 15 }}
 						noWrap
 					>
-						Consfirm Password
+						Confirm Password
 					</Typography>
 					<InputField
 						placeholder="Consfirm Password"
-						type="password"
-						// value={email}
-						// onChange={(e) => setEmail(e.target.value)}
+						type={showPassword ? "text" : "password"}
+						value={confirmPassword}
+						onChange={(e) => setConfirmPassword(e.target.value)}
 						style={{ width: "50%", height: "35px", marginTop: "20px" }}
 					/>
 				</div>
 				<FormControlLabel
-					control={<Checkbox defaultChecked style={{ color: "grey" }} />}
-					label="Remember me"
+					control={
+						<Checkbox
+							checked={showPassword}
+							onChange={(e) => setShowPassword(e.target.checked)}
+							style={{ color: "grey" }}
+						/>
+					}
+					label="Show Password"
 					style={{ color: "grey", marginLeft: "19.2%" }}
 				/>
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+						alignItems: "center",
+						width: "60%",
+					}}
+				>
+					<Typography
+						style={{ fontSize: 18, color: "grey", marginTop: 15 }}
+						noWrap
+					>
+						Address
+					</Typography>
+					<InputField
+						placeholder="Address"
+						type="text"
+						value={address}
+						onChange={(e) => setAddress(e.target.value)}
+						style={{ width: "50%", height: "35px", marginTop: "20px" }}
+					/>
+				</div>
 				<div
 					style={{
 						display: "flex",
@@ -147,10 +190,10 @@ const SignupForm = () => {
 						Phone Number
 					</Typography>
 					<InputField
-						placeholder="Email"
-						type="email"
-						// value={email}
-						// onChange={(e) => setEmail(e.target.value)}
+						placeholder="Phone Number"
+						type="Number"
+						value={phone}
+						onChange={(e) => setPhone(e.target.value)}
 						style={{ width: "50%", height: "35px", marginTop: "20px" }}
 					/>
 				</div>

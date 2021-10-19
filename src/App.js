@@ -17,7 +17,6 @@ function App() {
 		if (!result.data.error) {
 			setUser(result.data.user);
 		}
-		console.log("result", result);
 	};
 	return <Routes />;
 }
