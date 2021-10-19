@@ -4,11 +4,8 @@ import Menubar from "./components/Menubar";
 import SignupForm from "./components/SignupForm";
 import Footer from "./components/Footer";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 
 const Signup = () => {
-	const history = useHistory();
-
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -41,8 +38,8 @@ const Signup = () => {
 			axios
 				.post(`${process.env.React_APP_BASE_URL}/user/create`, data)
 				.then((res) => {
-					if (res.data.error) {
-						alert(res.data.error);
+					if (res.data.err) {
+						alert(res.data.err);
 					} else {
 						setName("");
 						setEmail("");

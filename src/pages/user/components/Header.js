@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import UserContext from "../../../context/UserContext";
+import axios from "axios";
 
 const Nav = styled.nav`
 	position: relative;
@@ -64,6 +66,14 @@ const SideButtons = styled.div`
 
 const Header = ({ component }) => {
 	const history = useHistory();
+	const { user, setUser } = useContext(UserContext);
+	const onLogout = () => {
+		axios.delete(`${process.env.React_APP_BASE_URL}/user/logout`).then(() => {
+			setUser({});
+			window.location.reload();
+			alert("Logged out Successfully!");
+		});
+	};
 	return (
 		<Nav>
 			<Logo>
@@ -74,12 +84,18 @@ const Header = ({ component }) => {
 				/>
 			</Logo>
 			<SideButtons style={{ width: component === "Signup" && 75 }}>
-				{component !== "Signup" && (
-					<div onClick={() => history.push("/login")}>
-						<AccountCircleIcon fontSize="large" />
-						<span>Login</span>
-					</div>
-				)}
+				{component !== "Signup" &&
+					(!user._id ? (
+						<div onClick={() => history.push("/login")}>
+							<AccountCircleIcon fontSize="large" />
+							<span>Login</span>
+						</div>
+					) : (
+						<div onClick={() => onLogout()}>
+							<AccountCircleIcon fontSize="large" />
+							<span>Logout</span>
+						</div>
+					))}
 
 				<div>
 					<ShoppingCartIcon fontSize="large" />

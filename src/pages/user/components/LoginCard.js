@@ -4,14 +4,19 @@ import {
 	CardContent,
 	Typography,
 	Button,
-	FormControlLabel,
-	Checkbox,
 	CardActions,
 } from "@mui/material";
 import InputField from "./InputField";
 import { Link } from "react-router-dom";
 
-const Cards = ({ email, password, setEmail, setPassword, onSubmit }) => {
+const Cards = ({
+	email,
+	password,
+	setEmail,
+	setPassword,
+	onSubmit,
+	setOpenModal,
+}) => {
 	return (
 		<Card
 			elevation="2"
@@ -55,11 +60,11 @@ const Cards = ({ email, password, setEmail, setPassword, onSubmit }) => {
 						onChange={(e) => setPassword(e.target.value)}
 						style={{ width: "87%", height: "35px", marginTop: "25px" }}
 					/>
-					<FormControlLabel
-						control={<Checkbox defaultChecked style={{ color: "grey" }} />}
-						label="Remember me"
-						style={{ marginTop: "20px", color: "grey" }}
-					/>
+					<Typography onClick={() => setOpenModal(true)}>
+						<Link to="#" style={{ textDecoration: "none" }}>
+							Forget Passwrod?
+						</Link>
+					</Typography>
 					<Button
 						variant="contained"
 						type="submit"
@@ -67,7 +72,7 @@ const Cards = ({ email, password, setEmail, setPassword, onSubmit }) => {
 							backgroundColor: "red",
 							width: "98%",
 							height: "35px",
-							marginTop: "20px",
+							marginTop: "50px",
 						}}
 					>
 						Login
