@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const Cards = ({ name, image, description, price }) => {
+const Cards = ({ name, image, description, price, product }) => {
 	return (
 		<Card
 			elevation="2"
@@ -32,14 +32,16 @@ const Cards = ({ name, image, description, price }) => {
 						alignItems: "center",
 					}}
 				>
-					<Typography style={{ fontSize: 22 }} noWrap>
-						{name}
+					<Typography style={{ fontSize: 18 }} noWrap>
+						<b>{name}</b>
 					</Typography>
 					<Typography style={{ fontSize: 12 }} noWrap>
-						${price}
+						<b>${price}</b>
 					</Typography>
 				</div>
-				<Typography noWrap>{description}</Typography>
+				<Typography style={{ fontSize: 16 }} noWrap>
+					{description}
+				</Typography>
 			</CardContent>
 			<CardActions
 				style={{
@@ -54,7 +56,12 @@ const Cards = ({ name, image, description, price }) => {
 					}}
 				>
 					<Typography>
-						<Link style={{ textDecoration: "none" }}>View Product</Link>
+						<a
+							style={{ textDecoration: "none" }}
+							href={`/product/${product._id}`}
+						>
+							View Product
+						</a>
 					</Typography>
 				</div>
 			</CardActions>

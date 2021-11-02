@@ -1,6 +1,8 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Wrap = styled.div`
 	border-radius: 4px;
@@ -22,35 +24,33 @@ const Wrap = styled.div`
 `;
 
 const ImgSlider = () => {
+	const [slider, setSlider] = useState([]);
+	useEffect(() => {
+		fetchData();
+	}, []);
+	const fetchData = async () => {
+		let temp = await axios.get(
+			`${process.env.React_APP_BASE_URL}/slider/active`,
+		);
+		setSlider(temp.data);
+	};
 	return (
 		<div style={{ marginTop: 20 }}>
 			<Carousel autoPlay infiniteLoop centerMode showThumbs={false}>
-				<Wrap>
-					<a>
-						<img src="https://wallpaperaccess.com/full/1831031.jpg" alt="" />
-					</a>
-				</Wrap>
-				<Wrap>
-					<a>
-						<img src="https://wallpaperaccess.com/full/1536610.jpg" alt="" />
-					</a>
-				</Wrap>
-				<Wrap>
-					<a>
-						<img
-							src="https://cdn.wallpapersafari.com/13/54/n6s37h.jpg"
-							alt=""
-						/>
-					</a>
-				</Wrap>
-				<Wrap>
-					<a>
-						<img
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcQPsewdioYxdfeRSVplLLE1GiqF3gT8Ou8g&usqp=CAU"
-							alt=""
-						/>
-					</a>
-				</Wrap>
+				{slider.map((item) => {
+					console.log(`${process.env.React_APP_BASE_URI}${item.image}`);
+
+					return (
+						<Wrap>
+							<a>
+								<img
+									src={`${process.env.React_APP_BASE_URI}${item.image}`}
+									alt=""
+								/>
+							</a>
+						</Wrap>
+					);
+				})}
 			</Carousel>
 		</div>
 	);
