@@ -3,15 +3,10 @@ import Header from "./components/Header";
 import Menubar from "./components/Menubar";
 import Footer from "./components/Footer";
 import styled from "@emotion/styled";
-import {
-  Typography,
-  FormControlLabel,
-  Checkbox,
-  Button,
-  Divider,
-} from "@mui/material";
+import { Typography, Button, Divider } from "@mui/material";
 import InputField from "./components/InputField";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   width: 80vw;
@@ -35,7 +30,7 @@ const Contact = () => {
     axios
       .get(`${process.env.React_APP_BASE_URL}/user/contact`, data)
       .then((res) => {
-        alert(res.data.msg);
+        toast.success(res.data.msg);
         setName("");
         setEmail("");
         setMessage("");
