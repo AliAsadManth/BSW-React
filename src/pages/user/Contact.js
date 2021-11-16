@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import Menubar from "./components/Menubar";
 import Footer from "./components/Footer";
@@ -11,6 +11,7 @@ import {
   Divider,
 } from "@mui/material";
 import InputField from "./components/InputField";
+import axios from "axios";
 
 const Container = styled.div`
   width: 80vw;
@@ -20,6 +21,26 @@ const Container = styled.div`
 `;
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      email,
+      message,
+    };
+    axios
+      .get(`${process.env.React_APP_BASE_URL}/user/contact`, data)
+      .then((res) => {
+        alert(res.data.msg);
+        setName("");
+        setEmail("");
+        setMessage("");
+      });
+  };
   return (
     <div>
       <Header />
@@ -38,7 +59,7 @@ const Contact = () => {
           }}
         />
         <form
-          //   onSubmit={onSubmit}
+          onSubmit={onSubmit}
           style={{ display: "flex", flexDirection: "column" }}
         >
           <div
@@ -57,29 +78,9 @@ const Contact = () => {
             </Typography>
             <InputField
               type="text"
-              // value={name}
-              // onChange={(e) => setName(e.target.value)}
-              style={{ width: "50%", height: "35px", marginTop: "20px" }}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "60%",
-            }}
-          >
-            <Typography
-              style={{ fontSize: 18, color: "grey", marginTop: 15 }}
-              noWrap
-            >
-              Phone Number
-            </Typography>
-            <InputField
-              type="number"
-              // value={email}
-              // onChange={(e) => setEmail(e.target.value)}
+              required={true}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
           </div>
@@ -99,8 +100,9 @@ const Contact = () => {
             </Typography>
             <InputField
               type="Email"
-              // value={password}
-              // onChange={(e) => setPassword(e.target.value)}
+              required={true}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
           </div>
@@ -119,7 +121,15 @@ const Contact = () => {
             </Typography>
             <InputField
               type="textarea"
-              style={{ width: "50%", height: "250px", marginTop: "20px" }}
+              required={true}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              style={{
+                width: "50%",
+                height: "250px",
+                marginTop: "20px",
+                paddingTop: 6,
+              }}
             />
           </div>
           <Divider

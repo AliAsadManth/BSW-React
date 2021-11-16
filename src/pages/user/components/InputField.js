@@ -54,7 +54,14 @@ const Textarea = styled.textarea`
   }
 `;
 
-const InputField = ({ placeholder, style, type, onChange, value }) => {
+const InputField = ({
+  placeholder,
+  style,
+  type,
+  onChange,
+  value,
+  required,
+}) => {
   return (
     <>
       {type === "textarea" ? (
@@ -64,6 +71,7 @@ const InputField = ({ placeholder, style, type, onChange, value }) => {
           value={value}
           onChange={onChange}
           style={style}
+          required={required}
         />
       ) : (
         <Input
@@ -72,6 +80,7 @@ const InputField = ({ placeholder, style, type, onChange, value }) => {
           value={value}
           onChange={onChange}
           style={style}
+          required={required}
         />
       )}
     </>

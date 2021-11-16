@@ -58,8 +58,18 @@ const Footer = () => {
         </div>
         <div style={{ color: "white", marginTop: 55 }}>
           <Text>Legals</Text>
-          <p style={{ fontSize: 12 }}>Privacy Policies</p>
-          <p style={{ fontSize: 12 }}>Terms And Condtions</p>
+          <p
+            style={{ fontSize: 12, cursor: "pointer" }}
+            onClick={() => history.push("/privacypolicy")}
+          >
+            Privacy Policies
+          </p>
+          <p
+            style={{ fontSize: 12, cursor: "pointer" }}
+            onClick={() => history.push("/terms")}
+          >
+            Terms And Condtions
+          </p>
         </div>
         <div style={{ color: "white", marginTop: 55 }}>
           <Text>Other Pages</Text>

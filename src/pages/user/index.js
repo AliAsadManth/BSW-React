@@ -7,6 +7,9 @@ import ProdunctView from "./ProdunctView";
 import SearchView from "./SearchView";
 import about from "./about";
 import Contact from "./Contact";
+import ItSolutions from "./ItSolutions";
+import PrivacyPolicy from "./PrivacyPolicy";
+import Terms from "./Terms";
 
 const index = () => {
   return (
@@ -18,6 +21,9 @@ const index = () => {
       <Route path="/search" component={SearchView} />
       <Route path="/about" component={about} />
       <Route path="/contact" component={Contact} />
+      <Route path="/itsolutions" component={ItSolutions} />
+      <Route path="/privacypolicy" component={PrivacyPolicy} />
+      <Route path="/terms" component={Terms} />
     </Switch>
   );
 };
