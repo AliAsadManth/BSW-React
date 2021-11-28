@@ -16,7 +16,7 @@ const Container = styled.nav`
 `;
 
 const LoginPage = () => {
-  const { setUser } = useContext(UserContext);
+  const { setUser, setCart } = useContext(UserContext);
   const history = useHistory();
 
   const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ const LoginPage = () => {
   const [modalEmail, setmodalEmail] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       toast.error("Both email and password are required!");
@@ -33,17 +33,21 @@ const LoginPage = () => {
         email,
         password,
       };
-      axios
-        .post(`${process.env.React_APP_BASE_URL}/user/login`, data)
-        .then((res) => {
-          if (res.data === "Invalid email or password") {
-            toast.error("Invalid email or password");
-          } else {
-            setUser(res.data);
-            history.push("/");
-            toast.success("Logged in Successfully!");
-          }
-        });
+      const result = await axios.post(
+        `${process.env.React_APP_BASE_URL}/user/login`,
+        data
+      );
+      if (result.data === "Invalid email or password") {
+        toast.error("Invalid email or password");
+      } else {
+        setUser(result.data);
+        const cart = await axios.get(
+          `${process.env.React_APP_BASE_URL}/cart/${result.data._id}`
+        );
+        setCart(cart.data);
+        history.push("/");
+        toast.success("Logged in Successfully!");
+      }
     }
   };
 

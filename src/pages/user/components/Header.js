@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -6,6 +6,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserContext from "../../../context/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Cart from "./Cart/Cart";
+
 const Nav = styled.nav`
   position: relative;
   height: 80px;
@@ -67,6 +69,8 @@ const SideButtons = styled.div`
 const Header = ({ component }) => {
   const history = useHistory();
   const { user, setUser } = useContext(UserContext);
+  const [showCart, setShowCart] = useState(false);
+
   const onLogout = () => {
     axios.delete(`${process.env.React_APP_BASE_URL}/user/logout`).then(() => {
       setUser({});
@@ -74,6 +78,7 @@ const Header = ({ component }) => {
       toast.success("Logged out Successfully!");
     });
   };
+
   return (
     <Nav>
       <Logo>
@@ -97,11 +102,27 @@ const Header = ({ component }) => {
             </div>
           ))}
 
-        <div>
+        <div
+          onClick={() => (showCart ? setShowCart(false) : setShowCart(true))}
+        >
           <ShoppingCartIcon fontSize="large" />
           <span>Cart</span>
         </div>
       </SideButtons>
+      {console.log(showCart)}
+      {showCart && (
+        <div
+          style={{
+            display: "flex",
+            position: "absolute",
+            top: 55,
+            right: 120,
+            zIndex: 999,
+          }}
+        >
+          <Cart />
+        </div>
+      )}
     </Nav>
   );
 };

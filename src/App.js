@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   axios.defaults.withCredentials = true;
-  const { setUser } = useContext(UserContext);
+  const { setUser, setCart } = useContext(UserContext);
   useEffect(() => {
     checkLogin();
     //eslint-disable-next-line
@@ -19,6 +19,10 @@ function App() {
     );
     if (!result.data.error) {
       setUser(result.data.user);
+      const cart = await axios.get(
+        `${process.env.React_APP_BASE_URL}/cart/${result.data.user._id}`
+      );
+      setCart(cart.data);
     }
   };
   return (
@@ -29,6 +33,8 @@ function App() {
         autoClose={3000}
         hideProgressBar={true}
         transition={Flip}
+        limit={1}
+        clearWaitingQueue={true}
       />
       {/* Routes */}
       <Routes />
