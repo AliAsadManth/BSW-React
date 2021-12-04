@@ -32,7 +32,7 @@ const Content = styled.div`
 
 const ProdunctView = () => {
   const params = useParams();
-  const { user } = useContext(UserContext);
+  const { user, cart, setCart } = useContext(UserContext);
 
   const [product, setProduct] = useState({});
   const [relatedProduct, setRelatedProduct] = useState([]);
@@ -63,11 +63,17 @@ const ProdunctView = () => {
         data
       );
       toast.success(temp.data.msg);
+      setCart((prev) => {
+        prev.product.push({ productId: product, quantity });
+        console.log(prev);
+        return { ...prev };
+      });
     }
   };
 
   return (
     <div div style={{ position: "relative", overflowX: "hidden" }}>
+      {console.log(cart)}
       <Header component="ProductView" />
       <Menubar />
       <div

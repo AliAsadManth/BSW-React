@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   axios.defaults.withCredentials = true;
-  const { setUser, setCart } = useContext(UserContext);
+  const { setUser, setCart, setAmount } = useContext(UserContext);
   useEffect(() => {
     checkLogin();
     //eslint-disable-next-line
@@ -19,10 +19,12 @@ function App() {
     );
     if (!result.data.error) {
       setUser(result.data.user);
-      const cart = await axios.get(
+      const res = await axios.get(
         `${process.env.React_APP_BASE_URL}/cart/${result.data.user._id}`
       );
-      setCart(cart.data);
+      console.log("cart: ", res);
+      setCart(res.data.cart);
+      setAmount(res.data.calc);
     }
   };
   return (

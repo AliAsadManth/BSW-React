@@ -16,7 +16,7 @@ const Container = styled.nav`
 `;
 
 const LoginPage = () => {
-  const { setUser, setCart } = useContext(UserContext);
+  const { setUser, setCart, setAmount } = useContext(UserContext);
   const history = useHistory();
 
   const [email, setEmail] = useState("");
@@ -41,10 +41,11 @@ const LoginPage = () => {
         toast.error("Invalid email or password");
       } else {
         setUser(result.data);
-        const cart = await axios.get(
+        const res = await axios.get(
           `${process.env.React_APP_BASE_URL}/cart/${result.data._id}`
         );
-        setCart(cart.data);
+        setCart(res.data.cart);
+        setAmount(res.data.calc);
         history.push("/");
         toast.success("Logged in Successfully!");
       }

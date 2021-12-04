@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import styled from "@emotion/styled";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Divider from "@mui/material/Divider";
 import SearchIcon from "@mui/icons-material/Search";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import UserContext from "../../../context/UserContext";
 import axios from "axios";
@@ -33,6 +32,7 @@ const Text = styled.span`
   justify-content: space-between;
   width: 110px;
   cursor: pointer;
+  z-index: 1000;
 `;
 const Searchbar = styled.input`
   margin-right: 4rem;
@@ -66,20 +66,30 @@ const Menubar = () => {
   const { setSearchProduct } = useContext(UserContext);
   const history = useHistory();
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const [anchorEl1, setAnchorEl1] = useState(null);
-  const open1 = Boolean(anchorEl1);
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const open2 = Boolean(anchorEl2);
-  const [anchorEl3, setAnchorEl3] = useState(null);
-  const open3 = Boolean(anchorEl3);
-  const [anchorEl4, setAnchorEl4] = useState(null);
-  const open4 = Boolean(anchorEl4);
+  const [openBrowse, setOpenBrowse] = useState(false);
+
+  const [mainCatergory, setMainCatergory] = useState([]);
+  const [mainCatergoryClick, setMainCatergoryClick] = useState({
+    open: false,
+    key: "",
+  });
   const [catergory, setCatergory] = useState([]);
+  const [filteredCategory, setFilteredCategory] = useState([]);
+  const [catergoryClick, setCatergoryClick] = useState({
+    open: false,
+    key: "",
+  });
   const [subCatergory, setSubCatergory] = useState([]);
+  const [filteredSubCatergory, setFilteredSubCatergory] = useState([]);
   const [search, setSearch] = useState("");
+
   useEffect(() => {
+    setMainCatergory([
+      { value: "Electronics Components, Power & Connectors", key: "10001" },
+      { value: "Electrical, Automation & Cables", key: "10002" },
+      { value: "Mechanical Products & Tools", key: "10003" },
+      { value: "IT, Test & Safety Equipment", key: "10004" },
+    ]);
     fetchData();
   }, []);
 
@@ -105,272 +115,315 @@ const Menubar = () => {
     }
   };
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleClick1 = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-  const handleClose1 = () => {
-    setAnchorEl1(null);
-  };
-
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-  };
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
-
-  const handleClick3 = (event) => {
-    setAnchorEl3(event.currentTarget);
-  };
-  const handleClose3 = () => {
-    setAnchorEl3(null);
+  // main category click
+  const MainCategoryClickToggle = (item) => {
+    let tempClick = mainCatergoryClick;
+    if (tempClick.open) {
+      if (tempClick.key === item.key) {
+        tempClick.open = !tempClick;
+      } else {
+        tempClick.key = item.key;
+      }
+    } else {
+      tempClick.open = true;
+      tempClick.key = item.key;
+    }
+    setMainCatergoryClick(tempClick);
+    let tempFiltedCat = catergory.filter((item) => {
+      return item.parentCategory === tempClick.key;
+    });
+    setFilteredCategory(tempFiltedCat);
+    setCatergoryClick({
+      open: false,
+      key: "",
+    });
   };
 
-  const handleClick4 = (event) => {
-    setAnchorEl4(event.currentTarget);
+  // Category click
+  const categoryClickToggle = (item) => {
+    let tempClick = catergoryClick;
+    if (tempClick.open) {
+      if (tempClick.key === item._id) {
+        tempClick.open = !tempClick;
+      } else {
+        tempClick.key = item._id;
+      }
+    } else {
+      tempClick.open = true;
+      tempClick.key = item._id;
+    }
+    setCatergoryClick(tempClick);
+    let tempFiltedSubCat = subCatergory.filter((item) => {
+      return item.parentCategory._id === tempClick.key;
+    });
+    setFilteredSubCatergory(tempFiltedSubCat);
   };
-  const handleClose4 = () => {
-    setAnchorEl4(null);
+
+  // Browse Buttom Click
+  const browseClick = () => {
+    setOpenBrowse(!openBrowse);
+    setMainCatergoryClick({
+      open: false,
+      key: "",
+    });
+    setCatergoryClick({
+      open: false,
+      key: "",
+    });
   };
 
   return (
     <Container>
-      <Text onClick={handleClick}>
+      <Text onClick={() => browseClick()}>
         Browse
-        <ExpandMoreIcon />
+        {!openBrowse ? <ExpandMoreIcon /> : <ExpandLessIcon />}
       </Text>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}
-      >
-        <MenuItem
-          onClick={handleClick1}
-          style={{
-            width: 420,
-            borderLeft: "4px solid blue",
-            marginBottom: 4,
-          }}
-        >
-          <span>Electronics Components, Power & Connectors</span>
-          <KeyboardArrowRightIcon style={{ color: "red", marginLeft: 35 }} />
-        </MenuItem>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl1}
-          open={open1}
-          onClose={handleClose1}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          style={{ marginLeft: 420, maxHeight: 195 }}
-        >
-          {catergory.map((item) => {
-            if (item.parentCategory === "10001") {
-              return (
-                <MenuItem
-                  // onClick={handleClick2}
-                  style={{
-                    width: 320,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: 420,
-                    }}
-                  >
-                    <span>{item.name}</span>
-                    <KeyboardArrowRightIcon
-                      style={{ color: "red", marginLeft: 35 }}
-                    />
-                  </div>
-                </MenuItem>
-              );
-            }
-          })}
-        </Menu>
-        <MenuItem
-          onClick={handleClick2}
-          style={{ width: 420, borderLeft: "4px solid red", marginBottom: 4 }}
-        >
-          Electrical, Automation & Cables
-          <KeyboardArrowRightIcon style={{ color: "red", marginLeft: 141 }} />
-        </MenuItem>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl2}
-          open={open2}
-          onClose={handleClose2}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          style={{ marginLeft: 420, maxHeight: 195 }}
-        >
-          {catergory.map((item) => {
-            if (item.parentCategory === "10002") {
-              return (
-                <MenuItem
-                  // onClick={handleClick2}
-                  style={{
-                    width: 320,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: 420,
-                    }}
-                  >
-                    <span>{item.name}</span>
-                    <KeyboardArrowRightIcon
-                      style={{ color: "red", marginLeft: 35 }}
-                    />
-                  </div>
-                </MenuItem>
-              );
-            }
-          })}
-        </Menu>
-        <MenuItem
-          onClick={handleClick3}
-          style={{
-            width: 420,
-            borderLeft: "4px solid yellow",
-            marginBottom: 4,
-          }}
-        >
-          Mechanical Products & Tools
-          <KeyboardArrowRightIcon style={{ color: "red", marginLeft: 160 }} />
-        </MenuItem>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl3}
-          open={open3}
-          onClose={handleClose3}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          style={{ marginLeft: 420, maxHeight: 195 }}
-        >
-          {catergory.map((item) => {
-            if (item.parentCategory === "10003") {
-              return (
-                <MenuItem
-                  // onClick={handleClick2}
-                  style={{
-                    width: 320,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: 420,
-                    }}
-                  >
-                    <span>{item.name}</span>
-                    <KeyboardArrowRightIcon
-                      style={{ color: "red", marginLeft: 35 }}
-                    />
-                  </div>
-                </MenuItem>
-              );
-            }
-          })}
-        </Menu>
-        <MenuItem
-          onClick={handleClick4}
-          style={{
-            width: 420,
-            borderLeft: "5px solid rgb(196, 214, 0)",
-          }}
-        >
-          IT, Test & Safety Equipment
-          <KeyboardArrowRightIcon style={{ color: "red", marginLeft: 167 }} />
-        </MenuItem>
-        <Menu
-          id="basic-menu"
-          anchorEl={anchorEl4}
-          open={open4}
-          onClose={handleClose4}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
-          }}
-          style={{ marginLeft: 420, maxHeight: 195 }}
-        >
-          {catergory.map((item) => {
-            if (item.parentCategory === "10004") {
-              return (
-                <MenuItem
-                  // onClick={handleClick2}
-                  style={{
-                    width: 320,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: 420,
-                    }}
-                  >
-                    <span>{item.name}</span>
-                    <KeyboardArrowRightIcon
-                      style={{ color: "red", marginLeft: 35 }}
-                    />
-                  </div>
-                </MenuItem>
-              );
-            }
-          })}
-        </Menu>
-      </Menu>
+      {openBrowse && (
+        <>
+          {/*main category browse */}
+          <div
+            style={{
+              margin: "auto",
+              width: "80%",
+              position: "absolute",
+              zIndex: 999,
+              top: 128,
+              left: -587,
+            }}
+          >
+            <div
+              style={{
+                margin: "20px 0",
+                float: "right",
+                background: "white",
+                width: "380px",
+                position: "relative",
+                borderRadius: "3px",
+                paddingLeft: 12,
+                paddingRight: 12,
+                boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+              }}
+            >
+              <ul>
+                {mainCatergory?.map((item, key) => {
+                  return (
+                    <>
+                      <li
+                        style={{
+                          marginBottom: "18px",
+                          display: "flex",
+                          marginLeft: -45,
+                        }}
+                      >
+                        <div
+                          style={{
+                            height: 40,
+                            width: 5,
+                            backgroundColor: "red",
+                            marginRight: 10,
+                          }}
+                        ></div>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            width: "100%",
+                            height: 40,
+                            alignItems: "center",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => MainCategoryClickToggle(item)}
+                        >
+                          <span
+                            style={{
+                              display: "block",
+                              fontSize: "16px",
+                            }}
+                          >
+                            {item.value}
+                          </span>
+                          <KeyboardArrowRightIcon />
+                        </div>
+
+                        {/* {catergory.filter((item) => {
+                      return item.parentCategory === mainCatergoryClick.key;
+                    })} */}
+                      </li>
+                      {key !== mainCatergory.length - 1 && (
+                        <Divider
+                          flexItem
+                          style={{
+                            backgroundColor: "grey",
+                            width: "85%",
+                            marginTop: -8,
+                            opacity: 0.4,
+                          }}
+                        />
+                      )}
+                    </>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+          {/* end of main category browse */}
+          {/* start of parent Category */}
+          {filteredCategory.length > 0 && mainCatergoryClick.open && (
+            <div
+              style={{
+                margin: "auto",
+                width: "80%",
+                position: "absolute",
+                zIndex: 888,
+                top: 128,
+                left: -212.6,
+              }}
+            >
+              <div
+                style={{
+                  margin: "20px 0",
+                  float: "right",
+                  background: "white",
+                  width: "350px",
+                  position: "relative",
+                  borderRadius: "3px",
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                }}
+              >
+                <ul>
+                  {filteredCategory?.map((item, key) => {
+                    return (
+                      <>
+                        <li
+                          style={{
+                            marginBottom: "18px",
+                            display: "flex",
+                            marginLeft: -45,
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              width: "100%",
+                              height: 40,
+                              alignItems: "center",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => categoryClickToggle(item)}
+                          >
+                            <span
+                              style={{
+                                display: "block",
+                                fontSize: "16px",
+                              }}
+                            >
+                              {item.name}
+                            </span>
+                            <KeyboardArrowRightIcon />
+                          </div>
+                        </li>
+                        {key !== filteredCategory.length - 1 && (
+                          <Divider
+                            flexItem
+                            style={{
+                              backgroundColor: "grey",
+                              width: "85%",
+                              marginTop: -8,
+                              opacity: 0.4,
+                            }}
+                          />
+                        )}
+                      </>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
+          {/* End of parent Category */}
+          {/* start of child Category */}
+          {filteredSubCatergory.length > 0 && catergoryClick.open && (
+            <div
+              style={{
+                margin: "auto",
+                width: "80%",
+                position: "absolute",
+                zIndex: 777,
+                top: 128,
+                left: 161.4,
+              }}
+            >
+              <div
+                style={{
+                  margin: "20px 0",
+                  float: "right",
+                  background: "white",
+                  width: "350px",
+                  position: "relative",
+                  borderRadius: "3px",
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                }}
+              >
+                <ul>
+                  {filteredSubCatergory?.map((item, key) => {
+                    return (
+                      <>
+                        <li
+                          style={{
+                            marginBottom: "18px",
+                            display: "flex",
+                            marginLeft: -45,
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              width: "100%",
+                              height: 40,
+                              alignItems: "center",
+                              cursor: "pointer",
+                            }}
+                            // onClick={() => categoryClickToggle(item)}
+                          >
+                            <span
+                              style={{
+                                display: "block",
+                                fontSize: "16px",
+                              }}
+                            >
+                              {item.name}
+                            </span>
+                          </div>
+                        </li>
+                        {key !== filteredSubCatergory.length - 1 && (
+                          <Divider
+                            flexItem
+                            style={{
+                              backgroundColor: "grey",
+                              width: "85%",
+                              marginTop: -8,
+                              opacity: 0.4,
+                            }}
+                          />
+                        )}
+                      </>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          )}
+          {/* End of child Category */}
+        </>
+      )}
+
       <div>
         <Divider
           orientation="vertical"

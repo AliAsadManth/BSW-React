@@ -10,6 +10,7 @@ import Contact from "./Contact";
 import ItSolutions from "./ItSolutions";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Terms from "./Terms";
+import Checkout from "./Checkout";
 
 const index = () => {
   return (
@@ -24,6 +25,7 @@ const index = () => {
       <Route path="/itsolutions" component={ItSolutions} />
       <Route path="/privacypolicy" component={PrivacyPolicy} />
       <Route path="/terms" component={Terms} />
+      <Route path="/checkoutDetails" component={Checkout} />
     </Switch>
   );
 };

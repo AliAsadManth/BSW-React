@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import UserContext from "../../../../context/UserContext";
-import { CountertopsOutlined } from "@mui/icons-material";
+import UserContext from "../../../context/UserContext";
+import { useHistory } from "react-router-dom";
 
 const Button = styled.button`
   background: red;
@@ -21,6 +21,7 @@ const Button = styled.button`
 
 const Cart = () => {
   const { cart } = useContext(UserContext);
+  const history = useHistory();
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -47,7 +48,7 @@ const Cart = () => {
           position: "relative",
           borderRadius: "3px",
           padding: "20px",
-          border: "1px solid grey",
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
         }}
       >
         <div
@@ -79,11 +80,11 @@ const Cart = () => {
           </span>
           <div style={{ float: "right" }}>
             <span style={{ color: "#abb0be" }}>Total:</span>
-            <span style={{ color: "#6394f8" }}>${totalPrice}</span>
+            <span style={{ color: "#6394f8" }}>${Math.floor(totalPrice)}</span>
           </div>
         </div>
 
-        <ul style={{ paddingTop: "20px" }}>
+        <ul style={{ paddingTop: "20px", height: 280, overflowY: "scroll" }}>
           {cart.product?.map((item) => {
             // totalPrice += item.quatity * item.productId.price;
             // setTotalPrice(10);
@@ -123,7 +124,13 @@ const Cart = () => {
             );
           })}
         </ul>
-        <Button>Checkout</Button>
+        <Button
+          onClick={() => history.push("/checkoutDetails")}
+          disabled={cart.length === 0}
+          style={{ backgroundColor: cart.length === 0 && "gray" }}
+        >
+          Proceed To Checkout
+        </Button>
       </div>
     </div>
   );

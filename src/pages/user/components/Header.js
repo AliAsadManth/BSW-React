@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserContext from "../../../context/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Cart from "./Cart/Cart";
+import Cart from "./Cart";
 
 const Nav = styled.nav`
   position: relative;
@@ -109,7 +109,6 @@ const Header = ({ component }) => {
           <span>Cart</span>
         </div>
       </SideButtons>
-      {console.log(showCart)}
       {showCart && (
         <div
           style={{
