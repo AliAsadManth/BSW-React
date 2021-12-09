@@ -10,6 +10,7 @@ import { Button } from "@mui/material";
 import Card from "./components/Cards";
 import UserContext from "../../context/UserContext";
 import { toast } from "react-toastify";
+import GuestUserModal from "./components/GuestUserModal";
 
 const Text = styled.p`
   font-size: 24px;
@@ -32,11 +33,12 @@ const Content = styled.div`
 
 const ProdunctView = () => {
   const params = useParams();
-  const { user, cart, setCart } = useContext(UserContext);
+  const { user, cart, setCart, setAmount } = useContext(UserContext);
 
   const [product, setProduct] = useState({});
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -53,6 +55,8 @@ const ProdunctView = () => {
   const addToCart = async () => {
     if (quantity <= 0) {
       toast.error("Quatity should be greater than 0");
+    } else if (!user?._id) {
+      setOpenModal(true);
     } else {
       const data = {
         productId: product._id,
@@ -63,11 +67,11 @@ const ProdunctView = () => {
         data
       );
       toast.success(temp.data.msg);
-      setCart((prev) => {
-        prev.product.push({ productId: product, quantity });
-        console.log(prev);
-        return { ...prev };
-      });
+      const res = await axios.get(
+        `${process.env.React_APP_BASE_URL}/cart/${user._id}`
+      );
+      setCart(res?.data?.cart);
+      setAmount(res?.data?.calc);
     }
   };
 
@@ -150,6 +154,7 @@ const ProdunctView = () => {
             );
           })}
         </Content>
+        <GuestUserModal open={openModal} setOpen={setOpenModal} />
       </div>
       <Footer />
     </div>

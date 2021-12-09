@@ -26,7 +26,7 @@ const Cart = () => {
 
   useEffect(() => {
     let tempPrice = totalPrice;
-    cart.product?.map((item) => {
+    cart?.product?.map((item) => {
       tempPrice += item.quatity * item.productId.price;
     });
     setTotalPrice(tempPrice);
@@ -76,7 +76,7 @@ const Cart = () => {
               whiteSpace: "nowrap",
             }}
           >
-            {cart.product?.length}
+            {cart?.product?.length}
           </span>
           <div style={{ float: "right" }}>
             <span style={{ color: "#abb0be" }}>Total:</span>
@@ -85,7 +85,7 @@ const Cart = () => {
         </div>
 
         <ul style={{ paddingTop: "20px", height: 280, overflowY: "scroll" }}>
-          {cart.product?.map((item) => {
+          {cart?.product?.map((item) => {
             // totalPrice += item.quatity * item.productId.price;
             // setTotalPrice(10);
             return (
@@ -126,8 +126,8 @@ const Cart = () => {
         </ul>
         <Button
           onClick={() => history.push("/checkoutDetails")}
-          disabled={cart.length === 0}
-          style={{ backgroundColor: cart.length === 0 && "gray" }}
+          disabled={cart?.length === 0}
+          style={{ backgroundColor: cart?.length === 0 && "gray" }}
         >
           Proceed To Checkout
         </Button>

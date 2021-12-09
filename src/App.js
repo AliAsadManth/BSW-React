@@ -22,9 +22,20 @@ function App() {
       const res = await axios.get(
         `${process.env.React_APP_BASE_URL}/cart/${result.data.user._id}`
       );
-      console.log("cart: ", res);
-      setCart(res.data.cart);
-      setAmount(res.data.calc);
+      setCart(res?.data?.cart);
+      setAmount(res?.data?.calc);
+    } else {
+      const response = await axios.patch(
+        `${process.env.React_APP_BASE_URL}/user/guestloggedin`
+      );
+      if (!response.data.error) {
+        setUser(response.data.user);
+        const res = await axios.get(
+          `${process.env.React_APP_BASE_URL}/cart/${response.data.user._id}`
+        );
+        setCart(res?.data?.cart);
+        setAmount(res?.data?.calc);
+      }
     }
   };
   return (

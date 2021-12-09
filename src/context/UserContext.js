@@ -2,9 +2,9 @@ import React, { useState } from "react";
 const UserContext = React.createContext();
 
 export const UserProvider = (props) => {
-  const [user, setUser] = useState({});
-  const [cart, setCart] = useState([]);
-  const [amount, setAmount] = useState({});
+  const [user, setUser] = useState();
+  const [cart, setCart] = useState();
+  const [amount, setAmount] = useState();
   const [searchProduct, setSearchProduct] = useState({
     query: "",
     products: [],

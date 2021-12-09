@@ -72,11 +72,22 @@ const Header = ({ component }) => {
   const [showCart, setShowCart] = useState(false);
 
   const onLogout = () => {
-    axios.delete(`${process.env.React_APP_BASE_URL}/user/logout`).then(() => {
-      setUser({});
-      window.location.reload();
-      toast.success("Logged out Successfully!");
-    });
+    console.log("user", user.role);
+    if (user.role === "user") {
+      axios.delete(`${process.env.React_APP_BASE_URL}/user/logout`).then(() => {
+        setUser({});
+        window.location.reload();
+        toast.success("Logged out Successfully!");
+      });
+    } else if (user.role === "guest") {
+      axios
+        .delete(`${process.env.React_APP_BASE_URL}/user/guestLogout`)
+        .then(() => {
+          setUser({});
+          window.location.reload();
+          toast.success("Logged out Successfully!");
+        });
+    }
   };
 
   return (
@@ -90,7 +101,7 @@ const Header = ({ component }) => {
       </Logo>
       <SideButtons style={{ width: component === "Signup" && 75 }}>
         {component !== "Signup" &&
-          (!user._id ? (
+          (!user?._id ? (
             <div onClick={() => history.push("/login")}>
               <AccountCircleIcon fontSize="large" />
               <span>Login</span>
