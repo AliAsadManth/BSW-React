@@ -9,6 +9,7 @@ import UserContext from "../../../context/UserContext";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import Switch from "@mui/material/Switch";
 
 const Container = styled.nav`
   height: 50px;
@@ -82,6 +83,7 @@ const Menubar = () => {
   const [subCatergory, setSubCatergory] = useState([]);
   const [filteredSubCatergory, setFilteredSubCatergory] = useState([]);
   const [search, setSearch] = useState("");
+  const [checked, setChecked] = React.useState(false);
 
   useEffect(() => {
     setMainCatergory([
@@ -106,12 +108,25 @@ const Menubar = () => {
     if (!search) {
       toast.error("Search is empty!");
     } else {
-      axios
-        .get(`${process.env.React_APP_BASE_URL}/product/search?q=${search}`)
-        .then((res) => {
-          setSearchProduct({ query: search, products: res.data });
-          history.push("/search");
-        });
+      if (!checked) {
+        axios
+          .get(
+            `${process.env.React_APP_BASE_URL}/product/search?mpn=false&q=${search}`
+          )
+          .then((res) => {
+            setSearchProduct({ query: search, products: res.data });
+            history.push("/search");
+          });
+      } else {
+        axios
+          .get(
+            `${process.env.React_APP_BASE_URL}/product/search?mpn=True&q=${search}`
+          )
+          .then((res) => {
+            setSearchProduct({ query: search, products: res.data });
+            history.push("/search");
+          });
+      }
     }
   };
 
@@ -431,8 +446,18 @@ const Menubar = () => {
           style={{ backgroundColor: "white", height: 35 }}
         />
       </div>
+      <Switch
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+        inputProps={{ "aria-label": "controlled" }}
+        color="error"
+      />
       <Searchbar
-        placeholder="What are you looking for?"
+        placeholder={
+          !checked
+            ? "Search Product By Name"
+            : "Search Product By Manufacturing Part Number"
+        }
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
