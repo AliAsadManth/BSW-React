@@ -11,6 +11,8 @@ import Card from "./components/Cards";
 import UserContext from "../../context/UserContext";
 import { toast } from "react-toastify";
 import GuestUserModal from "./components/GuestUserModal";
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
 const Text = styled.p`
   font-size: 24px;
@@ -19,17 +21,18 @@ const Text = styled.p`
   cursor: pointer;
 `;
 
-const Picture = styled.img`
-  object-fit: fill;
-  height: 75vh;
-  width: 50vw;
-`;
-
 const Content = styled.div`
   margin-left: -20px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 `;
+
+const imageGallery = {
+  position: "relative",
+  objectFit: "fill",
+  width: "50%",
+  overflow: "hidden",
+};
 
 const ProdunctView = () => {
   const params = useParams();
@@ -39,7 +42,11 @@ const ProdunctView = () => {
   const [relatedProduct, setRelatedProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [openModal, setOpenModal] = useState(false);
-
+  const [gallery, setGallery] = useState([
+    {
+      original: "https://via.placeholder.com/1000x600?text=No+Image+1",
+    },
+  ]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,6 +55,14 @@ const ProdunctView = () => {
     let temp = await axios.get(
       `${process.env.React_APP_BASE_URL}/product/${params.id}`
     );
+    let tempgallery = [];
+
+    temp.data.product.image.map((item) => {
+      tempgallery.push({
+        original: `${process.env.React_APP_BASE_URI}${item}`,
+      });
+    });
+    tempgallery.length > 0 && setGallery(tempgallery);
     setProduct(temp.data.product);
     setRelatedProduct(temp.data.relatedProducts);
   };
@@ -95,7 +110,9 @@ const ProdunctView = () => {
           {moment(product.createdAt).format("MM-DD-YYYY")}
         </Text>
         <div style={{ display: "flex" }}>
-          <Picture src={`${process.env.React_APP_BASE_URI}${product.image}`} />
+          <div style={imageGallery}>
+            <ImageGallery items={gallery} showIndex={true} />
+          </div>
           <div
             style={{
               display: "grid",

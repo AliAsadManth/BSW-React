@@ -11,7 +11,7 @@ import ItSolutions from "./ItSolutions";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Terms from "./Terms";
 import Checkout from "./Checkout";
-
+import CategoryProduct from "./CategoryProduct";
 const index = () => {
   return (
     <Switch>
@@ -26,6 +26,7 @@ const index = () => {
       <Route path="/privacypolicy" component={PrivacyPolicy} />
       <Route path="/terms" component={Terms} />
       <Route path="/checkoutDetails" component={Checkout} />
+      <Route path="/catproduct/:id" component={CategoryProduct} />
     </Switch>
   );
 };

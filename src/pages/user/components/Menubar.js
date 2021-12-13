@@ -405,7 +405,18 @@ const Menubar = () => {
                               alignItems: "center",
                               cursor: "pointer",
                             }}
-                            // onClick={() => categoryClickToggle(item)}
+                            onClick={() => {
+                              history.push(`/catproduct/${item._id}`);
+                              setOpenBrowse(false);
+                              setMainCatergoryClick({
+                                open: false,
+                                key: "",
+                              });
+                              setCatergoryClick({
+                                open: false,
+                                key: "",
+                              });
+                            }}
                           >
                             <span
                               style={{
