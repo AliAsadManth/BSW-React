@@ -15,9 +15,9 @@ const Checkout = () => {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    setName(user.name);
-    setEmail(user.email);
-    setAddress(user.address);
+    setName(user?.name);
+    setEmail(user?.email);
+    setAddress(user?.address);
     setPhone(user?.phone_no?.slice(3));
   }, [user]);
 
@@ -30,13 +30,22 @@ const Checkout = () => {
             product_data: {
               name: name,
             },
-            unit_amount: parseInt(amount.grandTotal) * 100,
+            unit_amount: parseInt(amount?.grandTotal) * 100,
           },
           quantity: 1,
         },
       ],
       metaData: {
-        booking: cart._id,
+        userId: user._id,
+        cartId: cart._id,
+        name: name,
+        email: email,
+        address: address,
+        phoneNo: phone,
+        goodsTotal: amount?.goodsTotal,
+        deliveryCharges: amount?.delivery,
+        tax: amount?.tax,
+        grandTotal: amount?.grandTotal,
       },
     };
     const result = await axios.patch(

@@ -112,7 +112,16 @@ const ProdunctView = () => {
         <div style={{ display: "flex" }}>
           <div style={imageGallery}>
             <ImageGallery items={gallery} showIndex={true} />
+            {product?.pdf && (
+              <a
+                href={`${process.env.React_APP_BASE_URI}${product.pdf}`}
+                target="_blank"
+              >
+                Click Here For Product PDF
+              </a>
+            )}
           </div>
+
           <div
             style={{
               display: "grid",

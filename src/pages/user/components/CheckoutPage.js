@@ -158,7 +158,7 @@ const CheckoutPage = ({
                 Goods Total:
               </Typography>
               <Typography style={{ fontSize: 16, marginTop: 15 }} noWrap>
-                {amount.goodsTotal}
+                {amount?.goodsTotal}
               </Typography>
             </div>
             <div
@@ -172,7 +172,7 @@ const CheckoutPage = ({
                 Delivery Charges:
               </Typography>
               <Typography style={{ fontSize: 16, marginTop: 15 }} noWrap>
-                {amount.delivery === 0 ? "Free" : amount.delivery}
+                {amount?.delivery === 0 ? "Free" : amount?.delivery}
               </Typography>
             </div>
             <div
@@ -186,7 +186,7 @@ const CheckoutPage = ({
                 GST:
               </Typography>
               <Typography style={{ fontSize: 16, marginTop: 15 }} noWrap>
-                {amount.tax}
+                {amount?.tax}
               </Typography>
             </div>
             <div
@@ -207,7 +207,7 @@ const CheckoutPage = ({
                 Grand Total:
               </Typography>
               <Typography style={{ fontSize: 16, marginTop: 15 }} noWrap>
-                {amount.grandTotal}
+                {amount?.grandTotal}
               </Typography>
             </div>
           </div>
