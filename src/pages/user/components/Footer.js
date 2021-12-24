@@ -9,6 +9,20 @@ const Container = styled.nav`
   display: flex;
   justify-content: space-between;
   padding: 0 10%;
+  @media (max-width: 1000px) {
+    padding: 0;
+    padding-left: 10px;
+  }
+  @media (max-width: 800px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    height: 100%;
+    margin-bottom: 25px;
+  }
+  @media (max-width: 450px) {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 `;
 const Text = styled.span`
   font-size: 18px;
@@ -87,7 +101,9 @@ const Footer = () => {
           </p>
           <p
             style={{ fontSize: 12, cursor: "pointer" }}
-            onClick={() => history.push("/itsolutions")}
+            onClick={() => {
+              window.location = "https://manth-sol.github.io/";
+            }}
           >
             IT Solutions
           </p>

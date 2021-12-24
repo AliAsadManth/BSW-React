@@ -6,7 +6,7 @@ import {
   Typography,
   CardActions,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Cards = ({ name, image, description, price, product }) => {
   return (
@@ -16,9 +16,34 @@ const Cards = ({ name, image, description, price, product }) => {
         margin: 20,
         width: 245,
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+        borderTop: "3px solid red",
+      }}
+      sx={{
+        transition: "all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s",
+        "&:hover": {
+          borderTop: "3px solid pink",
+          transform: "scale(1.05)",
+        },
+        ["@media (max-width: 500px)"]: {
+          width: "200px !important",
+        },
+        ["@media (max-width: 450px)"]: {
+          width: "180px !important",
+        },
+        ["@media (max-width: 400px)"]: {
+          width: "245px !important",
+        },
       }}
     >
-      <CardMedia component="img" height="160" image={image} alt="Product" />
+      <CardMedia
+        component="img"
+        height="160"
+        image={image}
+        alt=""
+        onError={(e) => (
+          (e.target.onerror = null), (e.target.src = "/assets/defaultImg.jpeg")
+        )}
+      />
       <CardContent
         style={{
           textAlign: "left",
@@ -43,26 +68,29 @@ const Cards = ({ name, image, description, price, product }) => {
           {description}
         </Typography>
       </CardContent>
-      <CardActions
-        style={{
-          borderTop: "1px solid grey",
-        }}
-      >
+      <CardActions>
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "left",
             width: "100%",
+            marginTop: -15,
+            alignItems: "center",
           }}
         >
           <Typography>
             <a
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", marginRight: 2 }}
               href={`/product/${product._id}`}
             >
               View Product
             </a>
           </Typography>
+          <ArrowForwardIosIcon
+            fontSize="sm"
+            color="red"
+            style={{ color: "red" }}
+          />
         </div>
       </CardActions>
     </Card>

@@ -15,6 +15,13 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 10px 6rem;
+  @media (max-width: 1230px) {
+    padding: 0;
+  }
+  @media (max-width: 500px) {
+    margin-left: -50px;
+    margin-right: -50px;
+  }
 `;
 
 const Logo = styled.a`
@@ -29,12 +36,30 @@ const Logo = styled.a`
     height: 60px;
   }
 `;
+const LogoContianer = styled.div`
+  margin-left: 10px;
+  @media (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+const CartContainer = styled.div`
+  display: flex;
+  position: absolute;
+  top: 55px;
+  right: 120px;
+  z-index: 999;
+  @media (max-width: 1200px) {
+    right: 20px;
+  }
+`;
 
 const SideButtons = styled.div`
   display: flex;
   margin-right: 4rem;
   width: 180px;
-  justify-content: space-between;
+  justify-content: flex-end;
   div {
     display: flex;
     align-items: center;
@@ -94,7 +119,7 @@ const Header = ({ component }) => {
     <Nav>
       <Logo>
         <img
-          src="/assets/bsw-logo-small.png"
+          src="/assets/bsw-logo-navbar.png"
           alt="BWS"
           onClick={() => history.push("/")}
         />
@@ -102,36 +127,28 @@ const Header = ({ component }) => {
       <SideButtons style={{ width: component === "Signup" && 75 }}>
         {component !== "Signup" &&
           (!user?._id ? (
-            <div onClick={() => history.push("/login")}>
+            <LogoContianer onClick={() => history.push("/login")}>
               <AccountCircleIcon fontSize="large" />
               <span>Login</span>
-            </div>
+            </LogoContianer>
           ) : (
-            <div onClick={() => onLogout()}>
+            <LogoContianer onClick={() => onLogout()}>
               <AccountCircleIcon fontSize="large" />
               <span>Logout</span>
-            </div>
+            </LogoContianer>
           ))}
 
-        <div
+        <LogoContianer
           onClick={() => (showCart ? setShowCart(false) : setShowCart(true))}
         >
           <ShoppingCartIcon fontSize="large" />
           <span>Cart</span>
-        </div>
+        </LogoContianer>
       </SideButtons>
       {showCart && (
-        <div
-          style={{
-            display: "flex",
-            position: "absolute",
-            top: 55,
-            right: 120,
-            zIndex: 999,
-          }}
-        >
+        <CartContainer>
           <Cart />
-        </div>
+        </CartContainer>
       )}
     </Nav>
   );

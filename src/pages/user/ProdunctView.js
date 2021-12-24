@@ -111,6 +111,7 @@ const ProdunctView = () => {
         </Text>
         <div style={{ display: "flex" }}>
           <div style={imageGallery}>
+            {console.log("galllery: ", gallery)}
             <ImageGallery items={gallery} showIndex={true} />
             {product?.pdf && (
               <a

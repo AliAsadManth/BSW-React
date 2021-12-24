@@ -2,17 +2,43 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Card from "./Cards";
 import axios from "axios";
+import FeaturedCard from "./FeaturedCard";
 
 const Container = styled.div`
   width: 80vw;
   padding: 10px 6%;
   margin-left: 3.5rem;
   margin-bottom: 50px;
+  @media (max-width: 1230px) {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+  }
 `;
 
-const Content = styled.div`
+const ContentRecent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+`;
+
+const ContentFeatured = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 400px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 `;
 
 const Text = styled.p`
@@ -20,7 +46,6 @@ const Text = styled.p`
   font-size: 24px;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
 `;
 
 const ProductsRow = () => {
@@ -40,13 +65,13 @@ const ProductsRow = () => {
     setFeaturedProducts(temp2.data);
   };
   return (
-    <div style={{ backgroundColor: "#e6e6e6" }}>
+    <div style={{ backgroundColor: "white" }}>
       <Container>
         <Text>
-          <b>Recent Products</b>
+          <b>Featured Products</b>
         </Text>
-        <Content>
-          {recentProducts.map((item) => {
+        <ContentFeatured>
+          {featuredProducts.map((item) => {
             return (
               <Card
                 name={item.name}
@@ -57,14 +82,14 @@ const ProductsRow = () => {
               />
             );
           })}
-        </Content>
+        </ContentFeatured>
         <Text>
-          <b>Featured Products</b>
+          <b>Recent Products</b>
         </Text>
-        <Content>
-          {featuredProducts.map((item) => {
+        <ContentRecent>
+          {recentProducts.map((item) => {
             return (
-              <Card
+              <FeaturedCard
                 name={item.name}
                 price={item.price}
                 image={`${process.env.React_APP_BASE_URI}${item.image}`}
@@ -73,7 +98,7 @@ const ProductsRow = () => {
               />
             );
           })}
-        </Content>
+        </ContentRecent>
       </Container>
     </div>
   );

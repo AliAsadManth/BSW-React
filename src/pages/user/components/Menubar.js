@@ -23,6 +23,19 @@ const Container = styled.nav`
     right: 11rem;
     cursor: pointer;
   }
+  @media (max-width: 1230px) {
+    padding: 0;
+    .searchIcon {
+      right: 5rem;
+    }
+  }
+  @media (max-width: 500px) {
+    margin-left: -50px;
+    margin-right: -50px;
+    .searchIcon {
+      right: 2rem;
+    }
+  }
 `;
 const Text = styled.span`
   margin-left: 4rem;
@@ -60,6 +73,48 @@ const Searchbar = styled.input`
       transition: opacity 250ms ease;
       opacity: 0;
     }
+  }
+`;
+
+const MainCatContainer = styled.div`
+  margin: auto;
+  width: 80%;
+  display: flex;
+  position: absolute;
+  z-index: 888;
+  top: 128px;
+  left: 160px;
+  @media (max-width: 1200px) {
+    top: 108px;
+    left: 60px;
+  }
+`;
+
+const SubCatContainer = styled.div`
+  margin: auto;
+  width: 80%;
+  display: flex;
+  position: absolute;
+  z-index: 888;
+  top: 128px;
+  left: 564px;
+  @media (max-width: 1200px) {
+    top: 108px;
+    left: 464px;
+  }
+`;
+
+const ChildCatContainer = styled.div`
+  margin: auto;
+  width: 80%;
+  display: flex;
+  position: absolute;
+  z-index: 888;
+  top: 128px;
+  left: 938px;
+  @media (max-width: 1200px) {
+    top: 108px;
+    left: 837px;
   }
 `;
 
@@ -169,7 +224,7 @@ const Menubar = () => {
     }
     setCatergoryClick(tempClick);
     let tempFiltedSubCat = subCatergory.filter((item) => {
-      return item.parentCategory._id === tempClick.key;
+      return item?.parentCategory?._id === tempClick?.key;
     });
     setFilteredSubCatergory(tempFiltedSubCat);
   };
@@ -196,16 +251,7 @@ const Menubar = () => {
       {openBrowse && (
         <>
           {/*main category browse */}
-          <div
-            style={{
-              margin: "auto",
-              width: "80%",
-              position: "absolute",
-              zIndex: 999,
-              top: 128,
-              left: -587,
-            }}
-          >
+          <MainCatContainer>
             <div
               style={{
                 margin: "20px 0",
@@ -281,20 +327,11 @@ const Menubar = () => {
                 })}
               </ul>
             </div>
-          </div>
+          </MainCatContainer>
           {/* end of main category browse */}
           {/* start of parent Category */}
           {filteredCategory.length > 0 && mainCatergoryClick.open && (
-            <div
-              style={{
-                margin: "auto",
-                width: "80%",
-                position: "absolute",
-                zIndex: 888,
-                top: 128,
-                left: -212.6,
-              }}
-            >
+            <SubCatContainer>
               <div
                 style={{
                   margin: "20px 0",
@@ -357,21 +394,12 @@ const Menubar = () => {
                   })}
                 </ul>
               </div>
-            </div>
+            </SubCatContainer>
           )}
           {/* End of parent Category */}
           {/* start of child Category */}
           {filteredSubCatergory.length > 0 && catergoryClick.open && (
-            <div
-              style={{
-                margin: "auto",
-                width: "80%",
-                position: "absolute",
-                zIndex: 777,
-                top: 128,
-                left: 161.4,
-              }}
-            >
+            <ChildCatContainer>
               <div
                 style={{
                   margin: "20px 0",
@@ -444,7 +472,7 @@ const Menubar = () => {
                   })}
                 </ul>
               </div>
-            </div>
+            </ChildCatContainer>
           )}
           {/* End of child Category */}
         </>

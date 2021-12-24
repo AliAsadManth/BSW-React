@@ -126,9 +126,12 @@ const Cart = () => {
         </ul>
         <Button
           onClick={() => history.push("/checkoutDetails")}
-          disabled={cart?.length === 0}
-          style={{ backgroundColor: cart?.length === 0 && "gray" }}
+          disabled={cart?.product?.length === 0 || !cart}
+          style={{
+            backgroundColor: cart?.product?.length === 0 || (!cart && "gray"),
+          }}
         >
+          {console.log(cart)}
           Proceed To Checkout
         </Button>
       </div>

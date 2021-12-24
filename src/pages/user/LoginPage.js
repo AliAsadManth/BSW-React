@@ -13,6 +13,14 @@ const Container = styled.nav`
   width: 100vw;
   display: grid;
   place-items: center;
+  @media (max-width: 450px) {
+    width: 105vw;
+    height: 105vh;
+  }
+  @media (max-width: 370px) {
+    width: 110vw;
+    height: 110vh;
+  }
 `;
 
 const LoginPage = () => {

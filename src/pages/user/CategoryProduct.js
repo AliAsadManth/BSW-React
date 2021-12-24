@@ -23,6 +23,7 @@ const CategoryProduct = () => {
     let temp = await axios.get(
       `${process.env.React_APP_BASE_URL}/product/getByCatId/${params.id}`
     );
+    console.log("temppppp: ", temp);
     setCatProducts(temp.data);
   };
   return (
@@ -38,10 +39,10 @@ const CategoryProduct = () => {
         }}
       >
         <span style={{ fontSize: 24 }}>
-          <b>"{catProducts?.length}"</b> results found
+          <b>"{catProducts?.products?.length}"</b> results found
         </span>
         <Content>
-          {catProducts?.map((item) => {
+          {catProducts?.products?.map((item) => {
             return (
               <Card
                 name={item.name}
