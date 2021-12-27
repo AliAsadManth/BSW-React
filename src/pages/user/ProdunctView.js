@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 import GuestUserModal from "./components/GuestUserModal";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const Text = styled.p`
   font-size: 24px;
@@ -21,18 +23,55 @@ const Text = styled.p`
   cursor: pointer;
 `;
 
+const InnerContainer = styled.div`
+  width: 80vw;
+  padding: 10px 7.7%;
+  margin-left: 3.5rem;
+  marginbottom: 50px;
+  @media (max-width: 900px) {
+    width: 100vw;
+    margin-left: 0;
+  }
+  @media (max-width: 500px) {
+    padding: 10px 2.5%;
+    margin-left: 0;
+  }
+`;
+
+const FlexContainer = styled.div`
+  display: flex;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+`;
+
 const Content = styled.div`
   margin-left: -20px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  @media (max-width: 1230px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 400px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
 `;
 
-const imageGallery = {
-  position: "relative",
-  objectFit: "fill",
-  width: "50%",
-  overflow: "hidden",
-};
+const ImageGalleryContainer = styled.div`
+  position: relative;
+  object-fit: fill;
+  width: 50%;
+  overflow: hidden;
+  @media (max-width: 800px) {
+    width: 70%;
+  }
+  @media (max-width: 500px) {
+    width: 95%;
+  }
+`;
 
 const ProdunctView = () => {
   const params = useParams();
@@ -40,7 +79,7 @@ const ProdunctView = () => {
 
   const [product, setProduct] = useState({});
   const [relatedProduct, setRelatedProduct] = useState([]);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [gallery, setGallery] = useState([
     {
@@ -92,26 +131,17 @@ const ProdunctView = () => {
 
   return (
     <div div style={{ position: "relative", overflowX: "hidden" }}>
-      {console.log(cart)}
       <Header component="ProductView" />
       <Menubar />
-      <div
-        style={{
-          width: "80vw",
-          padding: "10px 7.7%",
-          marginLeft: "3.5rem",
-          marginBottom: "50px",
-        }}
-      >
+      <InnerContainer>
         <Text style={{ marginBottom: -10 }}>
           <b>{product.name}</b>
         </Text>
         <Text style={{ fontSize: "16px" }}>
           {moment(product.createdAt).format("MM-DD-YYYY")}
         </Text>
-        <div style={{ display: "flex" }}>
-          <div style={imageGallery}>
-            {console.log("galllery: ", gallery)}
+        <FlexContainer>
+          <ImageGalleryContainer>
             <ImageGallery items={gallery} showIndex={true} />
             {product?.pdf && (
               <a
@@ -121,7 +151,7 @@ const ProdunctView = () => {
                 Click Here For Product PDF
               </a>
             )}
-          </div>
+          </ImageGalleryContainer>
 
           <div
             style={{
@@ -134,31 +164,68 @@ const ProdunctView = () => {
               <Text style={{ marginBottom: 10 }}>
                 <b>${product.price}</b> Per Piece
               </Text>
+              <div style={{ display: "flex" }}>
+                <div style={{ display: "flex" }}>
+                  <div
+                    style={{
+                      width: 35,
+                      height: 35,
+                      backgroundColor: "lightgray",
+                      display: "grid",
+                      placeItems: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() =>
+                      quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
+                    }
+                  >
+                    <RemoveIcon />
+                  </div>
 
-              <input
-                type="Number"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-                style={{
-                  width: 35,
-                  height: 29,
-                  marginRight: 10,
-                  paddingLeft: 10,
-                }}
-              />
-              <Button
-                variant="contained"
-                type="submit"
-                style={{
-                  backgroundColor: "red",
-                }}
-                onClick={addToCart}
-              >
-                Add to Cart
-              </Button>
+                  <input
+                    type="Number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    disabled
+                    style={{
+                      width: 35,
+                      height: 30,
+                      paddingLeft: 10,
+                      backgroundColor: "white",
+                    }}
+                  />
+                  <div
+                    style={{
+                      width: 35,
+                      height: 35,
+                      backgroundColor: "lightgray",
+                      display: "grid",
+                      placeItems: "center",
+                      cursor: "pointer",
+                      marginRight: 10,
+                    }}
+                    onClick={() => setQuantity(quantity + 1)}
+                  >
+                    <AddIcon />
+                  </div>
+                </div>
+
+                <Button
+                  variant="contained"
+                  type="submit"
+                  style={{
+                    backgroundColor: quantity !== 0 && "red",
+                    width: 135,
+                  }}
+                  disabled={quantity === 0}
+                  onClick={addToCart}
+                >
+                  Add to Cart
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </FlexContainer>
         <Text>
           <b>Product Description</b>
         </Text>
@@ -182,7 +249,7 @@ const ProdunctView = () => {
           })}
         </Content>
         <GuestUserModal open={openModal} setOpen={setOpenModal} />
-      </div>
+      </InnerContainer>
       <Footer />
     </div>
   );
