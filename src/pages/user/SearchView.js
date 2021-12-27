@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../../context/UserContext";
 import Header from "./components/Header";
 import Menubar from "./components/Menubar";
 import Footer from "./components/Footer";
 import Card from "./components/Cards";
 import styled from "@emotion/styled";
+import PaginationRounded from "./components/Pagination";
+import axios from "axios";
 
 const Content = styled.div`
   margin-left: -20px;
@@ -13,12 +15,31 @@ const Content = styled.div`
 `;
 
 const SearchView = () => {
-  const { searchProduct } = useContext(UserContext);
+  const { searchProduct, setSearchProduct } = useContext(UserContext);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    searchProduct?.query && onPageChange();
+  }, [page]);
+
+  const onPageChange = () => {
+    axios
+      .get(
+        `${process.env.React_APP_BASE_URL}/product/search?mpn=${searchProduct?.mpn}&q=${searchProduct?.query}&page=${page}`
+      )
+      .then((res) => {
+        setSearchProduct({
+          query: searchProduct?.query,
+          products: res.data,
+          mpn: searchProduct?.mpn,
+        });
+      });
+  };
 
   return (
     <div style={{ position: "relative", overflowX: "hidden" }}>
       <Header component="ProductView" />
-      <Menubar />
+      <Menubar page={page} />
       <div
         style={{
           width: "80vw",
@@ -32,7 +53,6 @@ const SearchView = () => {
           <b>"{searchProduct.query}"</b>
         </span>
         <Content>
-          {console.log(searchProduct)}
           {searchProduct?.products?.products?.map((item) => {
             return (
               <Card
@@ -45,6 +65,13 @@ const SearchView = () => {
             );
           })}
         </Content>
+        <PaginationRounded
+          page={page}
+          count={searchProduct?.products?.total_pages}
+          onChange={(e, value) => {
+            setPage(value);
+          }}
+        />
       </div>
       <Footer />
     </div>

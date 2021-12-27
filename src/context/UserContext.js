@@ -7,6 +7,7 @@ export const UserProvider = (props) => {
   const [amount, setAmount] = useState();
   const [searchProduct, setSearchProduct] = useState({
     query: "",
+    mpn: false,
     products: [],
   });
 

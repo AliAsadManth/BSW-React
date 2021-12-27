@@ -169,7 +169,7 @@ const Menubar = () => {
             `${process.env.React_APP_BASE_URL}/product/search?mpn=false&q=${search}`
           )
           .then((res) => {
-            setSearchProduct({ query: search, products: res.data });
+            setSearchProduct({ query: search, products: res.data, mpn: false });
             history.push("/search");
           });
       } else {
@@ -178,7 +178,7 @@ const Menubar = () => {
             `${process.env.React_APP_BASE_URL}/product/search?mpn=True&q=${search}`
           )
           .then((res) => {
-            setSearchProduct({ query: search, products: res.data });
+            setSearchProduct({ query: search, products: res.data, mpn: true });
             history.push("/search");
           });
       }

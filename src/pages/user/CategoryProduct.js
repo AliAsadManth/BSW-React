@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Card from "./components/Cards";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
+import PaginationRounded from "./components/Pagination";
 import axios from "axios";
 
 const Content = styled.div`
@@ -16,16 +17,19 @@ const Content = styled.div`
 const CategoryProduct = () => {
   const params = useParams();
   const [catProducts, setCatProducts] = useState([]);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     fetchData();
-  }, [params.id]);
+  }, [params.id, page]);
+
   const fetchData = async () => {
     let temp = await axios.get(
-      `${process.env.React_APP_BASE_URL}/product/getByCatId/${params.id}`
+      `${process.env.React_APP_BASE_URL}/product/getByCatId/${params.id}?page=${page}`
     );
-    console.log("temppppp: ", temp);
     setCatProducts(temp.data);
   };
+
   return (
     <div style={{ position: "relative", overflowX: "hidden" }}>
       <Header component="ProductView" />
@@ -54,6 +58,13 @@ const CategoryProduct = () => {
             );
           })}
         </Content>
+        <PaginationRounded
+          page={page}
+          count={catProducts?.total_pages}
+          onChange={(e, value) => {
+            setPage(value);
+          }}
+        />
       </div>
       <Footer />
     </div>
