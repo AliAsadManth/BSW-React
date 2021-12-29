@@ -10,11 +10,19 @@ const Container = styled.div`
   padding: 10px 7.5%;
   margin-left: 3.5rem;
   margin-bottom: 50px;
+  @media (max-width: 1100px) {
+    width: 90vw;
+    margin: 0;
+  }
+  @media (max-width: 500px) {
+    width: 98vw;
+    padding: 0 1%;
+  }
 `;
 
 const PrivacyPolicy = () => {
   return (
-    <div div style={{ position: "relative", overflowX: "hidden" }}>
+    <div style={{ position: "relative", overflowX: "hidden" }}>
       <Header />
       <Menubar />
       <Container>

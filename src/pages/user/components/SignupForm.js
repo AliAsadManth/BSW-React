@@ -67,7 +67,7 @@ const SignupForm = ({
         flexItem
         style={{
           backgroundColor: "grey",
-          width: 1045,
+          width: "95%",
           marginTop: 20,
           opacity: 0.4,
         }}
@@ -89,7 +89,7 @@ const SignupForm = ({
             value={name}
             onChange={(e) => setName(e.target.value)}
             style={{
-              width: "344px",
+              width: "55%",
               height: "35px",
               marginTop: "20px",
             }}
@@ -107,7 +107,7 @@ const SignupForm = ({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "344px", height: "35px", marginTop: "20px" }}
+            style={{ width: "55%", height: "35px", marginTop: "20px" }}
           />
         </InnerContainer>
         <InnerContainer>
@@ -122,7 +122,7 @@ const SignupForm = ({
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "344px", height: "35px", marginTop: "20px" }}
+            style={{ width: "55%", height: "35px", marginTop: "20px" }}
           />
         </InnerContainer>
         <InnerContainer>
@@ -137,7 +137,7 @@ const SignupForm = ({
             type={showPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            style={{ width: "344px", height: "35px", marginTop: "20px" }}
+            style={{ width: "55%", height: "35px", marginTop: "20px" }}
           />
         </InnerContainer>
         <InnerContainer>
@@ -150,7 +150,7 @@ const SignupForm = ({
               />
             }
             label="Show Password"
-            style={{ color: "grey", marginLeft: "32%" }}
+            style={{ color: "grey", marginLeft: -20 }}
           />
         </InnerContainer>
         <InnerContainer>
@@ -165,7 +165,7 @@ const SignupForm = ({
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            style={{ width: "344px", height: "35px", marginTop: "20px" }}
+            style={{ width: "55%", height: "35px", marginTop: "20px" }}
           />
         </InnerContainer>
         <InnerContainer>
@@ -180,14 +180,14 @@ const SignupForm = ({
             type="Number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            style={{ width: "344px", height: "35px", marginTop: "20px" }}
+            style={{ width: "55%", height: "35px", marginTop: "20px" }}
           />
         </InnerContainer>
         <Divider
           flexItem
           style={{
             backgroundColor: "grey",
-            width: 1045,
+            width: "95%",
             marginTop: 20,
             opacity: 0.4,
           }}

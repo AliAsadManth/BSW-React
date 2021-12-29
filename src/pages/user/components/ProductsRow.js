@@ -36,9 +36,6 @@ const ContentFeatured = styled.div`
   @media (max-width: 700px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @media (max-width: 400px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
 `;
 
 const Text = styled.p`

@@ -217,7 +217,7 @@ const CheckoutPage = ({
         flexItem
         style={{
           backgroundColor: "grey",
-          width: 1045,
+          width: "95%",
           marginTop: 20,
           opacity: 0.4,
         }}

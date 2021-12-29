@@ -12,6 +12,27 @@ const Content = styled.div`
   margin-left: -20px;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  @media (max-width: 1230px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+`;
+
+const Container = styled.div`
+  width: 80vw;
+  padding: 10px 7.7%;
+  margin-left: 3.5rem;
+  margin-bottom: 50px;
+  @media (max-width: 720px) {
+    width: 100vw;
+
+    margin: 0;
+  }
+  @media (max-width: 500px) {
+    padding: 0 1%;
+  }
 `;
 
 const CategoryProduct = () => {
@@ -34,14 +55,7 @@ const CategoryProduct = () => {
     <div style={{ position: "relative", overflowX: "hidden" }}>
       <Header component="ProductView" />
       <Menubar />
-      <div
-        style={{
-          width: "80vw",
-          padding: "10px 7.7%",
-          marginLeft: "3.5rem",
-          marginBottom: "50px",
-        }}
-      >
+      <Container>
         <span style={{ fontSize: 24 }}>
           <b>"{catProducts?.products?.length}"</b> results found
         </span>
@@ -65,7 +79,7 @@ const CategoryProduct = () => {
             setPage(value);
           }}
         />
-      </div>
+      </Container>
       <Footer />
     </div>
   );

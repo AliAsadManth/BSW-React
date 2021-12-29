@@ -55,9 +55,6 @@ const Content = styled.div`
   @media (max-width: 900px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @media (max-width: 400px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-  }
 `;
 
 const ImageGalleryContainer = styled.div`
@@ -79,7 +76,7 @@ const ProdunctView = () => {
 
   const [product, setProduct] = useState({});
   const [relatedProduct, setRelatedProduct] = useState([]);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [openModal, setOpenModal] = useState(false);
   const [gallery, setGallery] = useState([
     {
@@ -142,7 +139,11 @@ const ProdunctView = () => {
         </Text>
         <FlexContainer>
           <ImageGalleryContainer>
-            <ImageGallery items={gallery} showIndex={true} />
+            <ImageGallery
+              items={gallery}
+              showIndex={true}
+              onErrorImageURL="https://via.placeholder.com/1000x600?text=No+Image+1"
+            />
             {product?.pdf && (
               <a
                 href={`${process.env.React_APP_BASE_URI}${product.pdf}`}

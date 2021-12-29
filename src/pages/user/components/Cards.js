@@ -31,7 +31,7 @@ const Cards = ({ name, image, description, price, product }) => {
           width: "180px !important",
         },
         ["@media (max-width: 400px)"]: {
-          width: "245px !important",
+          width: "150px !important",
         },
       }}
     >

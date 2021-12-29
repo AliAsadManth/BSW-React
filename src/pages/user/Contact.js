@@ -13,6 +13,30 @@ const Container = styled.div`
   padding: 10px 7.5%;
   margin-left: 3.5rem;
   margin-bottom: 50px;
+  @media (max-width: 1100px) {
+    width: 90vw;
+    margin: 0;
+  }
+  @media (max-width: 500px) {
+    width: 98vw;
+    padding: 0 1%;
+  }
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  @media (max-width: 1230px) {
+    width: 80%;
+  }
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+  @media (max-width: 700px) {
+    display: block;
+  }
 `;
 
 const Contact = () => {
@@ -37,7 +61,7 @@ const Contact = () => {
       });
   };
   return (
-    <div>
+    <div style={{ position: "relative", overflowX: "hidden" }}>
       <Header />
       <Menubar />
       <Container>
@@ -48,7 +72,7 @@ const Contact = () => {
           flexItem
           style={{
             backgroundColor: "grey",
-            width: 1045,
+            width: "95%",
             marginTop: 20,
             opacity: 0.4,
           }}
@@ -57,14 +81,7 @@ const Contact = () => {
           onSubmit={onSubmit}
           style={{ display: "flex", flexDirection: "column" }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "60%",
-            }}
-          >
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -78,15 +95,8 @@ const Contact = () => {
               onChange={(e) => setName(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "60%",
-            }}
-          >
+          </InnerContainer>
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -100,14 +110,8 @@ const Contact = () => {
               onChange={(e) => setEmail(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              width: "60%",
-            }}
-          >
+          </InnerContainer>
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -126,12 +130,12 @@ const Contact = () => {
                 paddingTop: 6,
               }}
             />
-          </div>
+          </InnerContainer>
           <Divider
             flexItem
             style={{
               backgroundColor: "grey",
-              width: 1045,
+              width: "95%",
               marginTop: 20,
               opacity: 0.4,
             }}
@@ -141,8 +145,9 @@ const Contact = () => {
             type="submit"
             style={{
               backgroundColor: "red",
-              width: "13%",
+              width: 150,
               marginTop: "20px",
+              marginBottom: 10,
             }}
           >
             Send Message
