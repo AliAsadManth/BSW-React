@@ -28,7 +28,7 @@ const Index = () => {
       <Route path="/itsolutions" component={ItSolutions} />
       <Route path="/privacypolicy" component={PrivacyPolicy} />
       <Route path="/terms" component={Terms} />
-      {!user.name ? (
+      {!user?.name ? (
         <>
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={Signup} />
