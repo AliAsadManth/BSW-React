@@ -48,14 +48,18 @@ const LoginPage = () => {
       if (result.data === "Invalid email or password") {
         toast.error("Invalid email or password");
       } else {
-        setUser(result.data);
-        const res = await axios.get(
-          `${process.env.React_APP_BASE_URL}/cart/${result.data._id}`
-        );
-        setCart(res.data.cart);
-        setAmount(res.data.calc);
-        history.push("/");
-        toast.success("Logged in Successfully!");
+        try {
+          setUser(result.data);
+          const res = await axios.get(
+            `${process.env.React_APP_BASE_URL}/cart/${result.data._id}`
+          );
+          setCart(res.data.cart);
+          setAmount(res.data.calc);
+          history.push("/");
+          toast.success("Logged in Successfully!");
+        } catch (err) {
+          console.log("err", err.response);
+        }
       }
     }
   };

@@ -13,9 +13,11 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (
       !name ||
       !email ||
@@ -25,8 +27,10 @@ const Signup = () => {
       !phone
     ) {
       toast.error("All fields are required!");
+      setLoading(false);
     } else if (password !== confirmPassword) {
       toast.error("Password and confirm password are not same!");
+      setLoading(false);
     } else {
       const data = {
         name,
@@ -49,6 +53,7 @@ const Signup = () => {
             setAddress("");
             setPhone("");
           }
+          setLoading(false);
         });
     }
   };
@@ -72,6 +77,7 @@ const Signup = () => {
         phone={phone}
         setPhone={setPhone}
         onSubmit={onSubmit}
+        loading={loading}
       />
       <Footer />
     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LandingPage from "./LandingPage";
 import { Switch, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
@@ -12,12 +12,15 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import Terms from "./Terms";
 import Checkout from "./Checkout";
 import CategoryProduct from "./CategoryProduct";
-const index = () => {
+import Orders from "./Orders";
+import Profile from "./Profile";
+import UserContext from "../../context/UserContext";
+
+const Index = () => {
+  const { user } = useContext(UserContext);
   return (
     <Switch>
       <Route path="/" exact component={LandingPage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/signup" component={Signup} />
       <Route path="/product/:id" component={ProdunctView} />
       <Route path="/search" component={SearchView} />
       <Route path="/about" component={about} />
@@ -25,10 +28,21 @@ const index = () => {
       <Route path="/itsolutions" component={ItSolutions} />
       <Route path="/privacypolicy" component={PrivacyPolicy} />
       <Route path="/terms" component={Terms} />
-      <Route path="/checkoutDetails" component={Checkout} />
-      <Route path="/catproduct/:id" component={CategoryProduct} />
+      {!user.name ? (
+        <>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={Signup} />
+        </>
+      ) : (
+        <>
+          <Route path="/checkoutDetails" component={Checkout} />
+          <Route path="/catproduct/:id" component={CategoryProduct} />
+          <Route path="/orders" component={Orders} />
+          <Route path="/profile" component={Profile} />
+        </>
+      )}
     </Switch>
   );
 };
 
-export default index;
+export default Index;

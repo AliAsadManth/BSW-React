@@ -7,6 +7,9 @@ import UserContext from "../../../context/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cart from "./Cart";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Divider from "@mui/material/Divider";
 
 const Nav = styled.nav`
   position: relative;
@@ -58,8 +61,8 @@ const CartContainer = styled.div`
 const SideButtons = styled.div`
   display: flex;
   margin-right: 4rem;
-  width: 180px;
   justify-content: flex-end;
+  alignitems: center;
   div {
     display: flex;
     align-items: center;
@@ -93,15 +96,31 @@ const SideButtons = styled.div`
 
 const Header = ({ component }) => {
   const history = useHistory();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setCart, setAmount, setSearchProduct } =
+    useContext(UserContext);
   const [showCart, setShowCart] = useState(false);
 
+  // for dropdown menu
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // for logout
   const onLogout = () => {
     console.log("user", user.role);
     if (user.role === "user") {
       axios.delete(`${process.env.React_APP_BASE_URL}/user/logout`).then(() => {
         setUser({});
-        window.location.reload();
+        setCart();
+        setAmount();
+        setSearchProduct();
+        history.push("/");
         toast.success("Logged out Successfully!");
       });
     } else if (user.role === "guest") {
@@ -109,7 +128,10 @@ const Header = ({ component }) => {
         .delete(`${process.env.React_APP_BASE_URL}/user/guestLogout`)
         .then(() => {
           setUser({});
-          window.location.reload();
+          setCart();
+          setAmount();
+          setSearchProduct();
+          history.push("/");
           toast.success("Logged out Successfully!");
         });
     }
@@ -132,10 +154,44 @@ const Header = ({ component }) => {
               <span>Login</span>
             </LogoContianer>
           ) : (
-            <LogoContianer onClick={() => onLogout()}>
-              <AccountCircleIcon fontSize="large" />
-              <span>Logout</span>
-            </LogoContianer>
+            <div
+              style={{
+                marginRight: 10,
+              }}
+            >
+              <LogoContianer onClick={handleClick}>
+                <AccountCircleIcon fontSize="large" />
+                <span>{user.name}</span>
+              </LogoContianer>
+              <Menu
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                sx={{ mt: 4.5 }}
+              >
+                <MenuItem
+                  style={{ width: 150 }}
+                  onClick={() => history.push("/orders")}
+                >
+                  My Orders
+                </MenuItem>
+                <MenuItem onClick={() => history.push("/profile")}>
+                  My Profile
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              </Menu>
+            </div>
           ))}
 
         <LogoContianer

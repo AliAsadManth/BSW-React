@@ -54,6 +54,7 @@ const SignupForm = ({
   phone,
   setPhone,
   onSubmit,
+  loading,
 }) => {
   return (
     <Container>
@@ -200,9 +201,11 @@ const SignupForm = ({
             width: 95,
             height: "35px",
             marginTop: "20px",
+            color: "white",
           }}
+          disabled={loading}
         >
-          Register
+          {loading ? <>Loading...</> : <>Register</>}
         </Button>
       </form>
     </Container>
