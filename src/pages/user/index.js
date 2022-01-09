@@ -28,6 +28,7 @@ const Index = () => {
       <Route path="/itsolutions" component={ItSolutions} />
       <Route path="/privacypolicy" component={PrivacyPolicy} />
       <Route path="/terms" component={Terms} />
+      <Route path="/catproduct/:id" component={CategoryProduct} />
       {!user?.name ? (
         <>
           <Route path="/login" component={LoginPage} />
@@ -36,7 +37,6 @@ const Index = () => {
       ) : (
         <>
           <Route path="/checkoutDetails" component={Checkout} />
-          <Route path="/catproduct/:id" component={CategoryProduct} />
           <Route path="/orders" component={Orders} />
           <Route path="/profile" component={Profile} />
         </>

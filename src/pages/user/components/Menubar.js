@@ -84,9 +84,14 @@ const MainCatContainer = styled.div`
   z-index: 888;
   top: 128px;
   left: 160px;
-  @media (max-width: 1200px) {
+  boxshadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  @media (max-width: 1230px) {
     top: 108px;
     left: 60px;
+  }
+  @media (max-width: 500px) {
+    top: 108px;
+    left: 10px;
   }
 `;
 
@@ -98,9 +103,17 @@ const SubCatContainer = styled.div`
   z-index: 888;
   top: 128px;
   left: 564px;
-  @media (max-width: 1200px) {
+  boxshadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  @media (max-width: 1230px) {
     top: 108px;
     left: 464px;
+  }
+  @media (max-width: 1100px) {
+    top: 108px;
+    left: 60px;
+  }
+  @media (max-width: 500px) {
+    left: 10px;
   }
 `;
 
@@ -111,10 +124,18 @@ const ChildCatContainer = styled.div`
   position: absolute;
   z-index: 888;
   top: 128px;
-  left: 938px;
-  @media (max-width: 1200px) {
+  left: 968px;
+  boxshadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  @media (max-width: 1230px) {
     top: 108px;
-    left: 837px;
+    left: 868px;
+  }
+  @media (max-width: 1100px) {
+    top: 108px;
+    left: 60px;
+  }
+  @media (max-width: 500px) {
+    left: 10px;
   }
 `;
 
@@ -155,8 +176,8 @@ const Menubar = () => {
     let tempSubCat = await axios.get(
       `${process.env.React_APP_BASE_URL}/category/subcategory`
     );
-    setCatergory(tempCat.data);
-    setSubCatergory(tempSubCat.data);
+    setCatergory(tempCat.data.categories);
+    setSubCatergory(tempSubCat.data.categories);
   };
 
   const onSearchClick = () => {
@@ -199,7 +220,7 @@ const Menubar = () => {
       tempClick.key = item.key;
     }
     setMainCatergoryClick(tempClick);
-    let tempFiltedCat = catergory.filter((item) => {
+    let tempFiltedCat = catergory?.filter((item) => {
       return item.parentCategory === tempClick.key;
     });
     setFilteredCategory(tempFiltedCat);
@@ -223,7 +244,7 @@ const Menubar = () => {
       tempClick.key = item._id;
     }
     setCatergoryClick(tempClick);
-    let tempFiltedSubCat = subCatergory.filter((item) => {
+    let tempFiltedSubCat = subCatergory?.filter((item) => {
       return item?.parentCategory?._id === tempClick?.key;
     });
     setFilteredSubCatergory(tempFiltedSubCat);
@@ -337,7 +358,7 @@ const Menubar = () => {
                   margin: "20px 0",
                   float: "right",
                   background: "white",
-                  width: "350px",
+                  width: "380px",
                   position: "relative",
                   borderRadius: "3px",
                   paddingLeft: 12,
@@ -356,6 +377,14 @@ const Menubar = () => {
                             marginLeft: -45,
                           }}
                         >
+                          <div
+                            style={{
+                              height: 40,
+                              width: 5,
+                              backgroundColor: "blue",
+                              marginRight: 10,
+                            }}
+                          ></div>
                           <div
                             style={{
                               display: "flex",
@@ -405,7 +434,7 @@ const Menubar = () => {
                   margin: "20px 0",
                   float: "right",
                   background: "white",
-                  width: "350px",
+                  width: "380px",
                   position: "relative",
                   borderRadius: "3px",
                   paddingLeft: 12,
@@ -424,6 +453,14 @@ const Menubar = () => {
                             marginLeft: -45,
                           }}
                         >
+                          <div
+                            style={{
+                              height: 40,
+                              width: 5,
+                              backgroundColor: "green",
+                              marginRight: 10,
+                            }}
+                          ></div>
                           <div
                             style={{
                               display: "flex",
