@@ -224,7 +224,7 @@ export default function BasicTabs({
               Confirm New Password
             </Typography>
             <InputField
-              placeholder="Consfirm New Password"
+              placeholder="Confirm New Password"
               type={showPassword ? "text" : "password"}
               value={newPassConfirm}
               onChange={(e) => setNewPassConfirm(e.target.value)}

@@ -134,7 +134,7 @@ const SignupForm = ({
             Confirm Password
           </Typography>
           <InputField
-            placeholder="Consfirm Password"
+            placeholder="Confirm Password"
             type={showPassword ? "text" : "password"}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}

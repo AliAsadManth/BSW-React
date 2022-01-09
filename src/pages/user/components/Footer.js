@@ -107,6 +107,14 @@ const Footer = () => {
           >
             IT Solutions
           </p>
+          <p
+            style={{ fontSize: 12, cursor: "pointer" }}
+            onClick={() => {
+              window.location = "http://bswengineering.com/dashboard/";
+            }}
+          >
+            Admin Dashboard
+          </p>
         </div>
       </Container>
       <Text

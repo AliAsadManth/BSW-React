@@ -172,12 +172,14 @@ const Menubar = () => {
   }, []);
 
   const fetchData = async () => {
-    let tempCat = await axios.get(`${process.env.React_APP_BASE_URL}/category`);
-    let tempSubCat = await axios.get(
-      `${process.env.React_APP_BASE_URL}/category/subcategory`
+    let tempCat = await axios.get(
+      `${process.env.React_APP_BASE_URL}/category/all`
     );
-    setCatergory(tempCat.data.categories);
-    setSubCatergory(tempSubCat.data.categories);
+    let tempSubCat = await axios.get(
+      `${process.env.React_APP_BASE_URL}/category/subcategory/product`
+    );
+    setCatergory(tempCat.data);
+    setSubCatergory(tempSubCat.data);
   };
 
   const onSearchClick = () => {
