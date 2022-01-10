@@ -110,7 +110,7 @@ const Footer = () => {
           <p
             style={{ fontSize: 12, cursor: "pointer" }}
             onClick={() => {
-              window.location = "http://bswengineering.com/dashboard/";
+              window.location = "https://bswengineering.com/dashboard/";
             }}
           >
             Admin Dashboard

@@ -4,6 +4,16 @@ import InputField from "./InputField";
 import { toast } from "react-toastify";
 import axios from "axios";
 import UserContext from "../../../context/UserContext";
+import styled from "@emotion/styled";
+
+const InnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @media (max-width: 550px) {
+    display: block;
+  }
+`;
 
 const GuestRegisterModal = ({ open, setOpen }) => {
   const { setUser, setCart, setAmount } = useContext(UserContext);
@@ -60,6 +70,9 @@ const GuestRegisterModal = ({ open, setOpen }) => {
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
+          ["@media (max-width: 550px)"]: {
+            width: 300,
+          },
         }}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -69,13 +82,7 @@ const GuestRegisterModal = ({ open, setOpen }) => {
           onSubmit={handleSubmit}
           style={{ display: "flex", flexDirection: "column" }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -89,14 +96,8 @@ const GuestRegisterModal = ({ open, setOpen }) => {
               onChange={(e) => setName(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          </InnerContainer>
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -110,14 +111,8 @@ const GuestRegisterModal = ({ open, setOpen }) => {
               onChange={(e) => setEmail(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          </InnerContainer>
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -131,14 +126,8 @@ const GuestRegisterModal = ({ open, setOpen }) => {
               onChange={(e) => setAddress(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
+          </InnerContainer>
+          <InnerContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -152,14 +141,8 @@ const GuestRegisterModal = ({ open, setOpen }) => {
               onChange={(e) => setPhone(e.target.value)}
               style={{ width: "50%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
+          </InnerContainer>
+          <InnerContainer>
             <Button
               variant="contained"
               type="submit"
@@ -172,7 +155,7 @@ const GuestRegisterModal = ({ open, setOpen }) => {
             >
               Submit
             </Button>
-          </div>
+          </InnerContainer>
         </form>
       </Box>
     </Modal>

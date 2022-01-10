@@ -57,6 +57,11 @@ const Searchbar = styled.input`
   border: 1px solid #d0cfce;
   border-radius: 3px;
   outline: none;
+  @media (max-width: 500px) {
+    padding: 0;
+    padding-left: 4px;
+    font-size: 12px;
+  }
   &:focus {
     border: 1px solid black;
     transition: 250ms ease;
@@ -531,11 +536,7 @@ const Menubar = () => {
         color="error"
       />
       <Searchbar
-        placeholder={
-          !checked
-            ? "Search Product By Name"
-            : "Search Product By Manufacturing Part Number"
-        }
+        placeholder={!checked ? "By Name" : "By Manufacturing Part Number"}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

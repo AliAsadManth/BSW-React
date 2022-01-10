@@ -25,6 +25,9 @@ const GuestUserModal = ({ open, setOpen }) => {
             bgcolor: "background.paper",
             boxShadow: 24,
             p: 4,
+            ["@media (max-width: 420px)"]: {
+              width: 300,
+            },
           }}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
