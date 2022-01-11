@@ -8,6 +8,47 @@ const Container = styled.div`
   padding: 10px 7.5%;
   margin-left: 3.5rem;
   margin-bottom: 50px;
+  @media (max-width: 1230px) {
+    padding: 10px 0%;
+  }
+  @media (max-width: 500px) {
+    margin-left: 14px;
+  }
+`;
+
+const InnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
+`;
+
+const LeftContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  @media (max-width: 800px) {
+    display: grid;
+  }
+`;
+
+const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
+`;
+const LeftMainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  @media (max-width: 800px) {
+    width: 100vw;
+  }
 `;
 
 const CheckoutPage = ({
@@ -34,24 +75,17 @@ const CheckoutPage = ({
         flexItem
         style={{
           backgroundColor: "grey",
-          width: 1045,
+          width: "95%",
           marginTop: 20,
           opacity: 0.4,
         }}
       />
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", flexDirection: "column", width: "50%" }}>
+      <InnerContainer>
+        <LeftMainContainer>
           <Typography style={{ fontSize: 24, marginTop: 15 }} noWrap>
             Personal Information
           </Typography>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
+          <LeftContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -63,17 +97,10 @@ const CheckoutPage = ({
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              style={{ width: "50%", height: "35px", marginTop: "20px" }}
+              style={{ width: "55%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
+          </LeftContainer>
+          <LeftContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -85,17 +112,10 @@ const CheckoutPage = ({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ width: "50%", height: "35px", marginTop: "20px" }}
+              style={{ width: "55%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
+          </LeftContainer>
+          <LeftContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -107,17 +127,10 @@ const CheckoutPage = ({
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              style={{ width: "50%", height: "35px", marginTop: "20px" }}
+              style={{ width: "55%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
+          </LeftContainer>
+          <LeftContainer>
             <Typography
               style={{ fontSize: 18, color: "grey", marginTop: 15 }}
               noWrap
@@ -129,11 +142,11 @@ const CheckoutPage = ({
               type="Number"
               value={parseInt(phone)}
               onChange={(e) => setPhone(e.target.value)}
-              style={{ width: "50%", height: "35px", marginTop: "20px" }}
+              style={{ width: "55%", height: "35px", marginTop: "20px" }}
             />
-          </div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", width: "35%" }}>
+          </LeftContainer>
+        </LeftMainContainer>
+        <RightContainer>
           <Typography style={{ fontSize: 24, marginTop: 15 }} noWrap>
             Order Information
           </Typography>
@@ -211,8 +224,8 @@ const CheckoutPage = ({
               </Typography>
             </div>
           </div>
-        </div>
-      </div>
+        </RightContainer>
+      </InnerContainer>
       <Divider
         flexItem
         style={{
@@ -222,14 +235,12 @@ const CheckoutPage = ({
           opacity: 0.4,
         }}
       />
-      <div
-        style={{ width: "90.5%", display: "flex", justifyContent: "flex-end" }}
-      >
+      <div style={{ width: "90.5%" }}>
         <Button
           variant="contained"
           style={{
             backgroundColor: "red",
-            width: "10%",
+            width: 110,
             height: "35px",
             marginTop: "20px",
           }}

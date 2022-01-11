@@ -53,7 +53,7 @@ const Footer = () => {
                 fontSize: 15,
               }}
             >
-              <PhoneIcon /> +61 (08) 62050609
+              <PhoneIcon /> +61 8 6249 2742
             </div>
           </Text>
           <br />
@@ -123,29 +123,18 @@ const Footer = () => {
           marginLeft: "auto",
           marginRight: "auto",
           paddingBottom: 25,
-          width: 275,
+          width: 225,
         }}
       >
         Follow us on:{"  "}
         <img
-          src="/assets/facebook.jpeg"
+          src="/assets/LinkedIn.svg"
           alt="Cards"
-          style={{ width: 35, borderRadius: 100 }}
-        />
-        <img
-          src="/assets/instagram.jpeg"
-          alt="Cards"
-          style={{ width: 35, borderRadius: 100 }}
-        />
-        <img
-          src="/assets/twitter.png"
-          alt="Cards"
-          style={{ width: 35, borderRadius: 100 }}
-        />
-        <img
-          src="/assets/youtube.jpeg"
-          alt="Cards"
-          style={{ width: 35, borderRadius: 100 }}
+          style={{ width: 105, borderRadius: 100, cursor: "pointer" }}
+          onClick={() =>
+            (window.location =
+              "https://www.linkedin.com/company/bsw-engineering-solutions-supplies")
+          }
         />
       </Text>
     </div>

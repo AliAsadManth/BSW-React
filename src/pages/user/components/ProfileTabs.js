@@ -130,6 +130,7 @@ export default function BasicTabs({
             <InputField
               placeholder="Email"
               type="email"
+              disabled={true}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={{ width: "55%", height: "35px", marginTop: "20px" }}

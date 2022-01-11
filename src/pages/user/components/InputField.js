@@ -61,6 +61,7 @@ const InputField = ({
   onChange,
   value,
   required,
+  disabled,
 }) => {
   return (
     <>
@@ -81,6 +82,7 @@ const InputField = ({
           onChange={onChange}
           style={style}
           required={required}
+          disabled={disabled}
         />
       )}
     </>

@@ -47,6 +47,9 @@ const Text = styled.span`
   width: 110px;
   cursor: pointer;
   z-index: 1000;
+  @media (max-width: 500px) {
+    font-size: 18px;
+  }
 `;
 const Searchbar = styled.input`
   margin-right: 4rem;
@@ -536,7 +539,7 @@ const Menubar = () => {
         color="error"
       />
       <Searchbar
-        placeholder={!checked ? "By Name" : "By Manufacturing Part Number"}
+        placeholder={!checked ? "Search By Name" : "Search By Part Number"}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

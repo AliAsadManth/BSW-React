@@ -56,7 +56,7 @@ const Checkout = () => {
   };
 
   return (
-    <div>
+    <div style={{ overflow: "hidden" }}>
       <Header component="Signup" />
       <Menubar />
       <CheckoutPage
