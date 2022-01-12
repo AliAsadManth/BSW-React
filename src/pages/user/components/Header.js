@@ -10,6 +10,7 @@ import Cart from "./Cart";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
+import Badge from "@mui/material/Badge";
 
 const Nav = styled.nav`
   position: relative;
@@ -96,7 +97,7 @@ const SideButtons = styled.div`
 
 const Header = ({ component }) => {
   const history = useHistory();
-  const { user, setUser, setCart, setAmount, setSearchProduct } =
+  const { user, setUser, cart, setCart, setAmount, setSearchProduct } =
     useContext(UserContext);
   const [showCart, setShowCart] = useState(false);
 
@@ -193,13 +194,14 @@ const Header = ({ component }) => {
               </Menu>
             </div>
           ))}
-
-        <LogoContianer
-          onClick={() => (showCart ? setShowCart(false) : setShowCart(true))}
-        >
-          <ShoppingCartIcon fontSize="large" />
-          <span>Cart</span>
-        </LogoContianer>
+        <Badge color="error" badgeContent={cart?.product?.length}>
+          <LogoContianer
+            onClick={() => (showCart ? setShowCart(false) : setShowCart(true))}
+          >
+            <ShoppingCartIcon fontSize="large" />
+            <span>Cart</span>
+          </LogoContianer>
+        </Badge>
       </SideButtons>
       {showCart && (
         <CartContainer>

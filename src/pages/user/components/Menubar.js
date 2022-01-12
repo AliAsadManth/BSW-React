@@ -189,7 +189,11 @@ const Menubar = () => {
     setCatergory(tempCat.data);
     setSubCatergory(tempSubCat.data);
   };
-
+  const handleKeyPress = (event) =>{
+    if(event.key === 'Enter'){
+      onSearchClick();
+    }
+  }
   const onSearchClick = () => {
     if (!search) {
       toast.error("Search is empty!");
@@ -542,6 +546,7 @@ const Menubar = () => {
         placeholder={!checked ? "Search By Name" : "Search By Part Number"}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onKeyPress={handleKeyPress}
       />
       <SearchIcon className="searchIcon" onClick={() => onSearchClick()} />
     </Container>
