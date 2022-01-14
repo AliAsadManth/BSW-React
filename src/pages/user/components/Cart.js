@@ -3,6 +3,10 @@ import styled from "@emotion/styled";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserContext from "../../../context/UserContext";
 import { useHistory } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Button = styled.button`
   background: red;
@@ -20,7 +24,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-  const { cart } = useContext(UserContext);
+  const { cart, amount, user, setCart, setAmount } = useContext(UserContext);
   const history = useHistory();
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -31,6 +35,18 @@ const Cart = () => {
     });
     setTotalPrice(tempPrice);
   }, []);
+
+  const onRemove = async (id) => {
+    const result = await axios.delete(
+      `${process.env.React_APP_BASE_URL}/cart/remove/${id}/${user._id}`
+    );
+    toast.success(result?.data?.msg);
+    const res = await axios.get(
+      `${process.env.React_APP_BASE_URL}/cart/${user._id}`
+    );
+    setCart(res?.data?.cart);
+    setAmount(res?.data?.calc);
+  };
 
   return (
     <div
@@ -52,7 +68,7 @@ const Cart = () => {
         }}
       >
         <div
-          style={{ borderBottom: "1px solid #e8e8e8", paddingBottom: "15px" }}
+          style={{ borderBottom: "1px solid #e8e8e8", paddingBottom: "32px" }}
         >
           <ShoppingCartIcon
             fontSize="small"
@@ -62,25 +78,9 @@ const Cart = () => {
               float: "left",
             }}
           />
-          <span
-            style={{
-              backgroundColor: "red",
-              borderRadius: "10px",
-              color: "white",
-              display: "inline-block",
-              fontSize: "12px",
-              lineHeight: 1,
-              padding: "3px 7px",
-              textAlign: "center",
-              verticalAlign: "middle",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {cart?.product?.length}
-          </span>
           <div style={{ float: "right" }}>
             <span style={{ color: "#abb0be" }}>Total:</span>
-            <span style={{ color: "#6394f8" }}>${Math.floor(totalPrice)}</span>
+            <span style={{ color: "#6394f8" }}>${amount?.goodsTotal}</span>
           </div>
         </div>
 
@@ -94,6 +94,7 @@ const Cart = () => {
                   marginBottom: "18px",
                   display: "flex",
                   marginLeft: -40,
+                  alignItems: "center",
                 }}
               >
                 <div>
@@ -101,24 +102,41 @@ const Cart = () => {
                     style={{ width: 50, marginRight: 10 }}
                     src={`${process.env.React_APP_BASE_URI}${item.productId.image[0]}`}
                     alt="item1"
+                    onError={(e) => (
+                      (e.target.onerror = null),
+                      (e.target.src = "/assets/defaultImg.jpeg")
+                    )}
                   />
                 </div>
-                <div>
-                  <span
-                    style={{
-                      display: "block",
-                      paddingTop: "10px",
-                      fontSize: "16px",
-                    }}
-                  >
-                    {item.productId.name}
-                  </span>
-                  <span style={{ color: "#6394f8", marginRight: "8px" }}>
-                    ${item.quatity * item.productId.price}
-                  </span>
-                  <span style={{ color: "#abb0be" }}>
-                    Quantity: {item.quatity}
-                  </span>
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "16px",
+                      }}
+                    >
+                      {item.productId.name}
+                    </span>
+                    <span style={{ color: "#6394f8", marginRight: "8px" }}>
+                      ${item.quatity * item.productId.price}
+                    </span>
+                    <span style={{ color: "#abb0be" }}>
+                      Quantity: {item.quatity}
+                    </span>
+                  </div>
+                  <div>
+                    <IconButton onClick={() => onRemove(item.productId._id)}>
+                      <CloseIcon />
+                    </IconButton>
+                  </div>
                 </div>
               </li>
             );
@@ -131,7 +149,6 @@ const Cart = () => {
             backgroundColor: cart?.product?.length === 0 || (!cart && "gray"),
           }}
         >
-          {console.log(cart)}
           Proceed To Checkout
         </Button>
       </div>

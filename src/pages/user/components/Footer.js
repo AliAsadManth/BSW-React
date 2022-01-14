@@ -53,7 +53,7 @@ const Footer = () => {
                 fontSize: 15,
               }}
             >
-              <PhoneIcon /> +61 8 6249 2742
+              <PhoneIcon /> +61 (08) 6249 2742
             </div>
           </Text>
           <br />
