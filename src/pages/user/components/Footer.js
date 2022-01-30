@@ -36,7 +36,7 @@ const Text = styled.span`
 const Footer = () => {
   const history = useHistory();
   return (
-    <div style={{ width: "100vw", backgroundColor: "rgb(51, 51, 51)" }}>
+    <div style={{ width: "100vw", backgroundColor: "#202c33" }}>
       <Container>
         <div style={{ color: "white", marginTop: 55 }}>
           <Text>We Accept</Text>
@@ -64,7 +64,11 @@ const Footer = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 fontSize: 15,
+                cursor: "pointer",
               }}
+              onClick={() =>
+                (window.location = "mailto:sales@bswengineering.com")
+              }
             >
               <EmailIcon /> sales@bswengineering.com
             </div>
@@ -102,7 +106,7 @@ const Footer = () => {
           <p
             style={{ fontSize: 12, cursor: "pointer" }}
             onClick={() => {
-              window.location = "https://manth-sol.github.io/";
+              history.push("/itsolutions");
             }}
           >
             IT Solutions

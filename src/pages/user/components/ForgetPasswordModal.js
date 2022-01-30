@@ -55,7 +55,7 @@ const ForgetPasswordModal = ({
             variant="contained"
             type="submit"
             style={{
-              backgroundColor: "red",
+              backgroundColor: "#ef4b51",
               height: "35px",
               marginTop: "10px",
               display: "flex",

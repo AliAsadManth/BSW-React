@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     "& .Mui-selected": {
-      backgroundColor: "red",
+      backgroundColor: "#ef4b51",
     },
   },
 }));

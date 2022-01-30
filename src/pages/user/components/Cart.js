@@ -9,7 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Button = styled.button`
-  background: red;
+  background: #ef4b51;
   color: white;
   text-align: center;
   padding: 12px;

@@ -72,7 +72,7 @@ const Cards = ({
             variant="contained"
             type="submit"
             style={{
-              backgroundColor: "red",
+              backgroundColor: "#ef4b51",
               width: "98%",
               height: "35px",
               marginTop: "50px",

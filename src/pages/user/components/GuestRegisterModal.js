@@ -147,7 +147,7 @@ const GuestRegisterModal = ({ open, setOpen }) => {
               variant="contained"
               type="submit"
               style={{
-                backgroundColor: "red",
+                backgroundColor: "#ef4b51",
                 height: "35px",
                 marginTop: "20px",
                 marginRight: 64,

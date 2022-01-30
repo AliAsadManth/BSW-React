@@ -16,7 +16,7 @@ const Cards = ({ name, image, description, price, product }) => {
         margin: 20,
         width: 245,
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-        borderTop: "3px solid red",
+        borderTop: "3px solid #ef4b51",
       }}
       sx={{
         transition: "all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s",
@@ -88,8 +88,8 @@ const Cards = ({ name, image, description, price, product }) => {
           </Typography>
           <ArrowForwardIosIcon
             fontSize="sm"
-            color="red"
-            style={{ color: "red" }}
+            color="#ef4b51"
+            style={{ color: "#ef4b51" }}
           />
         </div>
       </CardActions>

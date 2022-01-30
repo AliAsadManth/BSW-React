@@ -215,7 +215,7 @@ const ProdunctView = () => {
                   variant="contained"
                   type="submit"
                   style={{
-                    backgroundColor: quantity !== 0 && "red",
+                    backgroundColor: quantity !== 0 && "#ef4b51",
                     width: 135,
                   }}
                   disabled={quantity === 0}

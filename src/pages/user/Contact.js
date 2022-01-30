@@ -144,7 +144,7 @@ const Contact = () => {
             variant="contained"
             type="submit"
             style={{
-              backgroundColor: "red",
+              backgroundColor: "#ef4b51",
               width: 150,
               marginTop: "20px",
               marginBottom: 10,

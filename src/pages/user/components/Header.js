@@ -53,7 +53,7 @@ const CartContainer = styled.div`
   position: absolute;
   top: 55px;
   right: 120px;
-  z-index: 999;
+  z-index: 9999;
   @media (max-width: 1200px) {
     right: 20px;
   }

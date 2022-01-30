@@ -17,7 +17,7 @@ const Container = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 6rem;
-  background-color: rgb(117, 117, 117);
+  background-color: #486475;
   .searchIcon {
     position: absolute;
     right: 11rem;
@@ -189,11 +189,11 @@ const Menubar = () => {
     setCatergory(tempCat.data);
     setSubCatergory(tempSubCat.data);
   };
-  const handleKeyPress = (event) =>{
-    if(event.key === 'Enter'){
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
       onSearchClick();
     }
-  }
+  };
   const onSearchClick = () => {
     if (!search) {
       toast.error("Search is empty!");
@@ -315,8 +315,9 @@ const Menubar = () => {
                           style={{
                             height: 40,
                             width: 5,
-                            backgroundColor: "red",
+                            backgroundColor: "#ef4b51",
                             marginRight: 10,
+                            borderRadius: 2,
                           }}
                         ></div>
 
@@ -395,8 +396,9 @@ const Menubar = () => {
                             style={{
                               height: 40,
                               width: 5,
-                              backgroundColor: "blue",
+                              backgroundColor: "#35858B",
                               marginRight: 10,
+                              borderRadius: 2,
                             }}
                           ></div>
                           <div
@@ -471,8 +473,9 @@ const Menubar = () => {
                             style={{
                               height: 40,
                               width: 5,
-                              backgroundColor: "green",
+                              backgroundColor: "#1572A1",
                               marginRight: 10,
+                              borderRadius: 2,
                             }}
                           ></div>
                           <div

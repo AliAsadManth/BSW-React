@@ -97,7 +97,7 @@ const CheckoutPage = ({
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              style={{ width: "55%", height: "35px", marginTop: "20px" }}
+              style={{ width: "65%", height: "35px", marginTop: "20px" }}
             />
           </LeftContainer>
           <LeftContainer>
@@ -112,7 +112,7 @@ const CheckoutPage = ({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ width: "55%", height: "35px", marginTop: "20px" }}
+              style={{ width: "65%", height: "35px", marginTop: "20px" }}
             />
           </LeftContainer>
           <LeftContainer>
@@ -127,7 +127,7 @@ const CheckoutPage = ({
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              style={{ width: "55%", height: "35px", marginTop: "20px" }}
+              style={{ width: "65%", height: "35px", marginTop: "20px" }}
             />
           </LeftContainer>
           <LeftContainer>
@@ -142,7 +142,7 @@ const CheckoutPage = ({
               type="Number"
               value={parseInt(phone)}
               onChange={(e) => setPhone(e.target.value)}
-              style={{ width: "55%", height: "35px", marginTop: "20px" }}
+              style={{ width: "65%", height: "35px", marginTop: "20px" }}
             />
           </LeftContainer>
         </LeftMainContainer>
@@ -239,7 +239,7 @@ const CheckoutPage = ({
         <Button
           variant="contained"
           style={{
-            backgroundColor: "red",
+            backgroundColor: "#ef4b51",
             width: 110,
             height: "35px",
             marginTop: "20px",

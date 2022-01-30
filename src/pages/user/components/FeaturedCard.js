@@ -70,8 +70,8 @@ export default function FeaturedCard({
               </Typography>
               <ArrowForwardIosIcon
                 fontSize="sm"
-                color="red"
-                style={{ color: "red" }}
+                color="#ef4b51"
+                style={{ color: "#ef4b51" }}
               />
             </div>
           </CardActions>

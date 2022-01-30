@@ -197,7 +197,7 @@ const SignupForm = ({
           variant="contained"
           type="submit"
           style={{
-            backgroundColor: "red",
+            backgroundColor: "#ef4b51",
             width: 95,
             height: "35px",
             marginTop: "20px",
