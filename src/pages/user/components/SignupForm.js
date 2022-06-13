@@ -12,7 +12,7 @@ import InputField from "./InputField";
 const Container = styled.div`
   width: 80vw;
   padding: 10px 7.5%;
-  margin-left: 3.5rem;
+  margin-left: 2.5rem;
   margin-bottom: 50px;
   @media (max-width: 1230px) {
     padding: 10px 0%;
@@ -26,7 +26,7 @@ const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 100%;
   @media (max-width: 1230px) {
     width: 80%;
   }
@@ -62,9 +62,9 @@ const SignupForm = ({
         Register
       </Typography>
       <Typography style={{ fontSize: 14, color: "grey" }} noWrap>
-        All fields are required!
+        ( All fields are required!)
       </Typography>
-      <Divider
+      {/* <Divider
         flexItem
         style={{
           backgroundColor: "grey",
@@ -72,7 +72,7 @@ const SignupForm = ({
           marginTop: 20,
           opacity: 0.4,
         }}
-      />
+      /> */}
       <form
         onSubmit={onSubmit}
         style={{ display: "flex", flexDirection: "column" }}
@@ -184,7 +184,7 @@ const SignupForm = ({
             style={{ width: "55%", height: "35px", marginTop: "20px" }}
           />
         </InnerContainer>
-        <Divider
+        {/* <Divider
           flexItem
           style={{
             backgroundColor: "grey",
@@ -192,7 +192,7 @@ const SignupForm = ({
             marginTop: 20,
             opacity: 0.4,
           }}
-        />
+        /> */}
         <Button
           variant="contained"
           type="submit"

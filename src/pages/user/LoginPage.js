@@ -6,9 +6,9 @@ import LoginCard from "./components/LoginCard";
 import UserContext from "../../context/UserContext";
 import ForgetPasswordModal from "./components/ForgetPasswordModal";
 import { toast } from "react-toastify";
+// import LoginGif from "../../../public/assets/93385-login.gif";
 
 const Container = styled.nav`
-  background-color: #e6e6e6;
   height: 100vh;
   width: 100vw;
   display: grid;
@@ -76,23 +76,37 @@ const LoginPage = () => {
   };
 
   return (
-    <Container>
-      <LoginCard
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        onSubmit={onSubmit}
-        setOpenModal={setOpenModal}
-      />
-      <ForgetPasswordModal
-        email={modalEmail}
-        setEmail={setmodalEmail}
-        open={openModal}
-        setOpen={setOpenModal}
-        onModalSubmit={onModalSubmit}
-      />
-    </Container>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <div style={{ height: "800px", width: "800px" }}>
+        <iframe
+          style={{ border: "none", height: "800px", width: "800px" }}
+          src="https://embed.lottiefiles.com/animation/93385"
+        ></iframe>
+      </div>
+      <Container>
+        <LoginCard
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          onSubmit={onSubmit}
+          setOpenModal={setOpenModal}
+        />
+        <ForgetPasswordModal
+          email={modalEmail}
+          setEmail={setmodalEmail}
+          open={openModal}
+          setOpen={setOpenModal}
+          onModalSubmit={onModalSubmit}
+        />
+      </Container>
+    </div>
   );
 };
 
