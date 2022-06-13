@@ -83,65 +83,71 @@ const Cart = () => {
             <span style={{ color: "#6394f8" }}>${amount?.goodsTotal}</span>
           </div>
         </div>
-
-        <ul style={{ paddingTop: "20px", height: 280, overflowY: "scroll" }}>
-          {cart?.product?.map((item) => {
-            // totalPrice += item.quatity * item.productId.price;
-            // setTotalPrice(10);
-            return (
-              <li
-                style={{
-                  marginBottom: "18px",
-                  display: "flex",
-                  marginLeft: -40,
-                  alignItems: "center",
-                }}
-              >
-                <div>
-                  <img
-                    style={{ width: 50, marginRight: 10 }}
-                    src={`${process.env.React_APP_BASE_URI}${item.productId.image[0]}`}
-                    alt="item1"
-                    onError={(e) => (
-                      (e.target.onerror = null),
-                      (e.target.src = "/assets/defaultImg.jpeg")
-                    )}
-                  />
-                </div>
-                <div
+        {!cart?.product || cart?.product?.length === 0 ? (
+          <iframe
+            style={{ border: "none" }}
+            src="https://embed.lottiefiles.com/animation/629"
+          ></iframe>
+        ) : (
+          <ul style={{ paddingTop: "20px", height: 280, overflowY: "scroll" }}>
+            {cart?.product?.map((item) => {
+              // totalPrice += item.quatity * item.productId.price;
+              // setTotalPrice(10);
+              return (
+                <li
                   style={{
-                    width: "100%",
+                    marginBottom: "18px",
                     display: "flex",
-                    justifyContent: "space-between",
+                    marginLeft: -40,
                     alignItems: "center",
                   }}
                 >
                   <div>
-                    <span
-                      style={{
-                        display: "block",
-                        fontSize: "16px",
-                      }}
-                    >
-                      {item.productId.name}
-                    </span>
-                    <span style={{ color: "#6394f8", marginRight: "8px" }}>
-                      ${item.quatity * item.productId.price}
-                    </span>
-                    <span style={{ color: "#abb0be" }}>
-                      Quantity: {item.quatity}
-                    </span>
+                    <img
+                      style={{ width: 50, marginRight: 10 }}
+                      src={`${process.env.React_APP_BASE_URI}${item.productId.image[0]}`}
+                      alt="item1"
+                      onError={(e) => (
+                        (e.target.onerror = null),
+                        (e.target.src = "/assets/defaultImg.jpeg")
+                      )}
+                    />
                   </div>
-                  <div>
-                    <IconButton onClick={() => onRemove(item.productId._id)}>
-                      <CloseIcon />
-                    </IconButton>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <div>
+                      <span
+                        style={{
+                          display: "block",
+                          fontSize: "16px",
+                        }}
+                      >
+                        {item.productId.name}
+                      </span>
+                      <span style={{ color: "#6394f8", marginRight: "8px" }}>
+                        ${item.quatity * item.productId.price}
+                      </span>
+                      <span style={{ color: "#abb0be" }}>
+                        Quantity: {item.quatity}
+                      </span>
+                    </div>
+                    <div>
+                      <IconButton onClick={() => onRemove(item.productId._id)}>
+                        <CloseIcon />
+                      </IconButton>
+                    </div>
                   </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                </li>
+              );
+            })}
+          </ul>
+        )}
         <Button
           onClick={() => history.push("/checkoutDetails")}
           disabled={cart?.product?.length === 0 || !cart}

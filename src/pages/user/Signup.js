@@ -61,24 +61,38 @@ const Signup = () => {
     <div div style={{ position: "relative", overflowX: "hidden" }}>
       <Header component="Signup" />
       <Menubar />
-      <SignupForm
-        name={name}
-        setName={setName}
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        confirmPassword={confirmPassword}
-        setConfirmPassword={setConfirmPassword}
-        showPassword={showPassword}
-        setShowPassword={setShowPassword}
-        address={address}
-        setAddress={setAddress}
-        phone={phone}
-        setPhone={setPhone}
-        onSubmit={onSubmit}
-        loading={loading}
-      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <SignupForm
+          name={name}
+          setName={setName}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          address={address}
+          setAddress={setAddress}
+          phone={phone}
+          setPhone={setPhone}
+          onSubmit={onSubmit}
+          loading={loading}
+        />
+        <div style={{ height: "600px", width: "600px" }}>
+          <iframe
+            style={{ border: "none", height: "600px", width: "600px" }}
+            src="https://embed.lottiefiles.com/animation/101191"
+          ></iframe>
+        </div>
+      </div>
       <Footer />
     </div>
   );

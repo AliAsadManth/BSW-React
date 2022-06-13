@@ -46,7 +46,7 @@ const ImgSlider = () => {
   return (
     <div style={{ marginTop: 20 }}>
       <Carousel autoPlay infiniteLoop centerMode showThumbs={false}>
-        {slider.map((item) => {
+        {slider?.map((item) => {
           console.log(`${process.env.React_APP_BASE_URI}${item.image}`);
 
           return (

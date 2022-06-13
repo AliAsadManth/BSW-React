@@ -23,7 +23,7 @@ const Cards = ({
       sx={{
         width: 400,
         height: 480,
-        boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+        boxShadow: "none",
         ["@media (max-width: 420px)"]: {
           width: 300,
         },
@@ -33,18 +33,20 @@ const Cards = ({
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Typography style={{ fontSize: 32 }} noWrap>
+          {/* <Typography style={{ fontSize: 32 }} noWrap>
             Login
-          </Typography>
+          </Typography> */}
           <Link to="/">
             <img
               src="/assets/bsw-logo-small.png"
               alt="BWS"
-              style={{ height: 75 }}
+              style={{
+                width: "9rem",
+              }}
             />
           </Link>
         </div>
@@ -54,17 +56,27 @@ const Cards = ({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={{ width: "87%", height: "35px", marginTop: "50px" }}
+            style={{ width: "87%", height: "45px", marginTop: "30px" }}
           />
           <InputField
             placeholder="Password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ width: "87%", height: "35px", marginTop: "25px" }}
+            style={{ width: "87%", height: "45px", marginTop: "20px" }}
           />
-          <Typography onClick={() => setOpenModal(true)}>
-            <Link to="#" style={{ textDecoration: "none" }}>
+          <Typography
+            style={{ marginTop: "5px" }}
+            onClick={() => setOpenModal(true)}
+          >
+            <Link
+              to="#"
+              style={{
+                textDecoration: "none",
+                fontSize: 15,
+                fontWeight: "600",
+              }}
+            >
               Forget Passwrod?
             </Link>
           </Typography>
@@ -74,8 +86,8 @@ const Cards = ({
             style={{
               backgroundColor: "#ef4b51",
               width: "98%",
-              height: "35px",
-              marginTop: "50px",
+              height: "45px",
+              marginTop: "30px",
             }}
           >
             Login
@@ -83,20 +95,13 @@ const Cards = ({
         </form>
       </CardContent>
 
-      <CardActions
-        style={{
-          borderTop: "1px solid grey",
-          position: "relative",
-          marginTop: 30,
-          float: "bottom",
-        }}
-      >
+      <CardActions>
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             width: "100%",
-            marginTop: 15,
+            marginTop: 5,
           }}
         >
           <Typography>
