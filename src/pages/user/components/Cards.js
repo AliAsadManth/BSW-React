@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  CardActions,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, CardActions } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Cards = ({ name, image, description, price, product }) => {
@@ -40,9 +34,7 @@ const Cards = ({ name, image, description, price, product }) => {
         height="160"
         image={image}
         alt=""
-        onError={(e) => (
-          (e.target.onerror = null), (e.target.src = "/assets/defaultImg.jpeg")
-        )}
+        onError={(e) => ((e.target.onerror = null), (e.target.src = "/assets/defaultImg.jpeg"))}
       />
       <CardContent
         style={{
@@ -79,18 +71,11 @@ const Cards = ({ name, image, description, price, product }) => {
           }}
         >
           <Typography>
-            <a
-              style={{ textDecoration: "none", marginRight: 2 }}
-              href={`/product/${product._id}`}
-            >
+            <a style={{ textDecoration: "none", marginRight: 2 }} href={`/product/${product._id}`}>
               View Product
             </a>
           </Typography>
-          <ArrowForwardIosIcon
-            fontSize="sm"
-            color="#ef4b51"
-            style={{ color: "#ef4b51" }}
-          />
+          <ArrowForwardIosIcon fontSize="sm" color="#ef4b51" style={{ color: "#ef4b51" }} />
         </div>
       </CardActions>
     </Card>

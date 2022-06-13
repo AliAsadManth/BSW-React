@@ -7,13 +7,7 @@ import Typography from "@mui/material/Typography";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { CardActions } from "@mui/material";
 
-export default function FeaturedCard({
-  name,
-  image,
-  description,
-  price,
-  product,
-}) {
+export default function FeaturedCard({ name, image, description, price, product }) {
   return (
     <Card
       sx={{
@@ -37,18 +31,10 @@ export default function FeaturedCard({
     >
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography
-            component="div"
-            variant="p"
-            style={{ fontSize: 18, fontWeight: 500 }}
-          >
+          <Typography component="div" variant="p" style={{ fontSize: 18, fontWeight: 500 }}>
             {name}
           </Typography>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
+          <Typography variant="subtitle1" color="text.secondary" component="div">
             ${price}
           </Typography>
           <CardActions style={{ marginLeft: -7 }}>
@@ -61,18 +47,11 @@ export default function FeaturedCard({
               }}
             >
               <Typography>
-                <a
-                  style={{ textDecoration: "none", marginRight: 2 }}
-                  href={`/product/${product._id}`}
-                >
+                <a style={{ textDecoration: "none", marginRight: 2 }} href={`/product/${product._id}`}>
                   View Product
                 </a>
               </Typography>
-              <ArrowForwardIosIcon
-                fontSize="sm"
-                color="#ef4b51"
-                style={{ color: "#ef4b51" }}
-              />
+              <ArrowForwardIosIcon fontSize="sm" color="#ef4b51" style={{ color: "#ef4b51" }} />
             </div>
           </CardActions>
         </CardContent>
@@ -82,9 +61,7 @@ export default function FeaturedCard({
         sx={{ width: 151 }}
         image={image}
         alt=""
-        onError={(e) => (
-          (e.target.onerror = null), (e.target.src = "/assets/defaultImg.jpeg")
-        )}
+        onError={(e) => ((e.target.onerror = null), (e.target.src = "/assets/defaultImg.jpeg"))}
       />
     </Card>
   );
